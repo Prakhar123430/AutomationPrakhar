@@ -92,8 +92,8 @@ Scenario: Selection for main type for every manufacturer code
       | coding-puzzle-client-449cc9d | en | 1 | 
       And sends a GET http request
       And user fetches a list of manufacture codes from manufacture API
-      And user passes response for each manufacturer code to maintype API
-      And sends a GET http request
+      And user sends a GET http request using the manufacturer code
+      | coding-puzzle-client-449cc9d | en | 1 |
       Then user validates response of main type for each manufacturer code
 	  
 	  

@@ -1,6 +1,9 @@
 package stepDefinition;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import org.apache.commons.logging.Log;
@@ -18,6 +21,9 @@ public class AutoManufactureApis extends APIAutoCommon {
 	String baseUri;
 	String endpoint;
 	Response resp;
+	Set<String> manufacturerCodes;
+	List<String> errorList;
+
 
 	@Given("^user sets the GET baseURL$")
 	public void user_sets_the_GET_baseURL() throws Exception {
@@ -141,8 +147,8 @@ public class AutoManufactureApis extends APIAutoCommon {
 	public void user_fetches_a_list_of_manufacture_codes_from_manufacture_API() throws Exception {
 		
 		try{
-			
-			List<Response> res = fetchManufacturerDetails(resp);
+			manufacturerCodes = new HashSet<String>();
+			manufacturerCodes = getManufacturerCode(resp);
 		}
 		
 		catch(Exception e){
@@ -152,10 +158,11 @@ public class AutoManufactureApis extends APIAutoCommon {
 	    
 	}
 	
-	@When("^user passes response for each manufacturer code to maintype API$")
-	public void user_passes_response_for_each_manufacturer_code_to_maintype_API() throws Exception {
-		
+	@When("^user sends a GET http request using the manufacturer code$")
+	public void user_sends_a_GET_http_request_using_the_manufacturer_code(DataTable queryParams) throws Throwable {
 		try{
+			errorList = new ArrayList<String>();
+			errorList = getCumulativeMismatchAfterResponse(baseUri, queryParams, manufacturerCodes);
 			
 		}
 		
@@ -163,23 +170,22 @@ public class AutoManufactureApis extends APIAutoCommon {
 			
 			Logger.getLogger(e.getMessage());
 		}
-	    
 	}
 
 	@Then("^user validates response of main type for each manufacturer code$")
 	public void user_validates_response_of_main_type_for_each_manufacturer_code() throws Exception {
 	    
 		try{
-			
+			boolean valid=false;
+			if(errorList.size()==0)
+				valid = true;
+			Assert.assertTrue("Invalid response received for Maintype", valid==true);
 		}
 		
 		catch(Exception e){
-			
-			
+			Logger.getLogger(e.getMessage());
 		}
 	}
-
-
 	// ***************************** End Of Test Scenarios**************************
 
 
