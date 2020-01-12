@@ -1,28 +1,59 @@
-Feature: Selection Of A Car Details
+Feature: Get Manufacturer Details
 
-Scenario: Get Manufacturer Details
-      Given user hits the  manufacturer get call and gets the manufacturer details
-      #When user gets the manufacturer details and hits the car type get call
-      #Then user enters the manufacturer details and the main type details and hits the built in date
+Scenario: Successful selection of manufacturer details with all parameters
+      Given user sets the GET baseURL 
+      When user appends the query parameters
+        | coding-puzzle-client-449cc9d | en | 1 |
+	  And sends a GET http request
+	  Then user validates the response
+	      
       
-Scenario: Remove waKey from manufacturer api to get unauthorized response
-     Given when user hits the manufacturer get call without the wakey the response returned is unauthorized.
+Scenario: Selection of manufacturer details without Key
+      Given user sets the GET baseURL 
+      When user appends the query parameters 
+      | coding-puzzle-client-449cc9d | en | 3 |
+	  And sends a GET http request
+	  Then user validates the response is unauthorized
       
-Scenario: Remove locale from manufacturer api to get bad request or internal server error response.
-     Given when user hits the manufacturer get call without the locale the response returned is bad request or internal server error.
+Scenario: Selection of manufacturer details without Locale
+      Given user sets the GET baseURL 
+      When user appends the query parameters 
+      | coding-puzzle-client-449cc9d | en | 2 |
+	  And sends a GET http request
+	  Then user validates the response is a bad request or internal server error
+	  
+Scenario: Checking main type dropdown without manufacturer code
+      Given user sets the GET baseURL 
+      When user appends the query parameters for maintype
+      | coding-puzzle-client-449cc9d | en | 020 | 2 |
+	  And sends a GET http request
+	  Then user validates that the response is a bad request or internal server error
+	  
+Scenario: Selection of maintype details without Locale
+      Given user sets the GET baseURL 
+      When user appends the query parameters for maintype
+       | coding-puzzle-client-449cc9d | en | 020 | 4 |
+	  And sends a GET http request
+	  Then user validates the response is a bad request or internal server error
+	  
+Scenario: Selection of main type details without Key
+      Given user sets the GET baseURL 
+      When user appends the query parameters 
+      | coding-puzzle-client-449cc9d | en | 020 | 3 |
+	  And sends a GET http request
+	  Then user validates the response is unauthorized
      
-Scenario: Remove manufacturer code from main type api code to get bad request.
-     Given when user hits the main types get call without the manufacturer code the response returned is a bad request.
-     
-Scenario: Remove locale from main type api to get bad request or internal server error response.
-     Given when user hits the main types get call without the locale but with the manufacturer code and wakey the response returned is a bad request or internal server error.
-      
-Scenario: Remove waKey from main type api to get unauthorized response.
-     Given when user hits the main types get call without the wakey but with the manufacturer code and locale the response returned is unauthorized. 
-     
-Scenario: Enter two digit manufacturer code from main type api to get bad request or internal server error response
-     Given when user hits the main type api with all required parameters where manufacturer code is of two digits the response returned is bad request or internal server error. 
-   
-Scenario: Enter arbitrary three digit manufacturer code that is not present in the dropdown
-     Given when user hits the main type api with arbitrary three digit manufacturer code that is not valid the response returned is a bad request or internal server error.   
-  
+Scenario: Enter two digit manufacturer code to check the main type response
+      Given user sets the GET baseURL 
+      When user appends the query parameters 
+      | coding-puzzle-client-449cc9d | en | 20 | 1|
+	  And sends a GET http request
+	  Then user validates the response is a bad request or internal server error
+	  
+Scenario: Enter arbitrary three digit manufacturer code to check the main type response
+      Given user sets the GET baseURL 
+      When user appends the query parameters 
+      | coding-puzzle-client-449cc9d | en | 123 | 1|
+	  And sends a GET http request
+	  Then user validates the response is a bad request or internal server error
+	  

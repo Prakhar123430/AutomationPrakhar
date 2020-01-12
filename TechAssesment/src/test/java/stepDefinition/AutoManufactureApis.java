@@ -5,19 +5,76 @@ import java.util.logging.Logger;
 
 import org.apache.commons.logging.Log;
 import commonResources.APIAutoCommon;
+import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import io.restassured.response.Response;
+import junit.framework.Assert;
 
 public class AutoManufactureApis extends APIAutoCommon {
 
 
-	@Given("^user hits the  manufacturer get call and gets the manufacturer details$")
-	public void user_hits_the_manufacturer_get_call_and_gets_the_manufacturer_details() {
+	String baseUri;
+	String endpoint;
+	Response resp;
+
+	@Given("^user sets the GET baseURL$")
+	public void user_sets_the_GET_baseURL() throws Exception {
+		try
+		{
+			baseUri = url;
+		}
+		catch(Exception e)
+		{
+			Logger.getLogger(e.getMessage());
+		}
+	}
+
+	@When("^user appends the query parameters$")
+	public void user_appends_the_query_parameters(DataTable queryParams) throws Exception {
+		try
+		{
+			List<List<String>> data = queryParams.raw();
+			endpoint = getManufactureEndpoint(data.get(0).get(0), data.get(0).get(1), data.get(0).get(2));
+		}
+		catch(Exception e)
+		{
+			Logger.getLogger(e.getMessage());
+		}
+	}
+
+	@When("^sends a GET http request$")
+	public void sends_a_GET_http_request() throws Exception {
+		try
+		{
+			resp = sendManufactureRequest(baseUri, endpoint);
+		}
+		catch(Exception e)
+		{
+			Logger.getLogger(e.getMessage());
+		}
+
+	}
+
+	@Then("^user validates the response$")
+	public void user_validates_the_response() throws Exception {
+		try
+		{
+			Assert.assertTrue("Invalid response received", validateAutoManufacturer(resp)==true);
+		}
+		catch(Exception e)
+		{
+			Logger.getLogger(e.getMessage());
+		}
+	}
+
+	@Then("^user validates the response is unauthorized$")
+	public void user_validates_the_response_is_unauthorized() throws Exception {
+
 		try{
-			Response res = getAutoManufacturerDetails();
-			validateAutoManufacturer(res);
+
+			Assert.assertTrue("Invalid response received", validateAutoManufactureAndMainTypesWithoutKey(resp)==true);
 		}
 
 		catch(Exception e){
@@ -26,38 +83,13 @@ public class AutoManufactureApis extends APIAutoCommon {
 
 	}
 
-	@Given("^when user hits the manufacturer get call without the wakey the response returned is unauthorized\\.$")
-	public void when_user_hits_the_manufacturer_get_call_without_the_wakey_the_response_returned_is_unauthorized() {
+	@Then("^user validates the response is a bad request or internal server error$")
+	public void user_validates_the_response_is_a_bad_request_or_internal_server_error() throws Exception {
 
 		try{
-			Response res = getAutoManufacturerDetailsWithoutKey();
-			validateAutoManufacturerWithoutKey(res);
-		}
-		catch(Exception e){
-			Logger.getLogger(e.getMessage());
-		}
-	}
 
-	@Given("^when user hits the manufacturer get call without the locale the response returned is bad request or internal server error\\.$")
-	public void when_user_hits_the_manufacturer_get_call_without_the_locale_the_response_returned_is_bad_request_or_internal_server_error() {
+			Assert.assertTrue("Invalid response received", validateAutoManufacturerandMainTypeWithoutLocale(resp)==true);
 
-		try{
-			Response res = getAutoManufacturerDetailsWithoutLocale();
-			validateAutoManufacturerWithoutLocale(res);
-		}
-
-		catch(Exception e){
-			Logger.getLogger(e.getMessage());
-		}
-
-	}
-
-	@Given("^when user hits the main types get call without the manufacturer code the response returned is a bad request\\.$")
-	public void when_user_hits_the_main_types_get_call_without_the_manufacturer_code_the_response_returned_is_a_bad_request(){
-
-		try{
-			Response res=getAutoMainTypesWithoutManufacturerCode();
-			validateAutoMainTypesWithoutManufacturerCode(res);
 		}
 
 		catch(Exception e){
@@ -65,57 +97,37 @@ public class AutoManufactureApis extends APIAutoCommon {
 		}
 	}
 
-	@Given("^when user hits the main types get call without the locale but with the manufacturer code and wakey the response returned is unauthorized\\.$")
-	public void when_user_hits_the_main_types_get_call_without_the_locale_but_with_the_manufacturer_code_and_wakey_the_response_returned_is_unauthorized(){
+	@When("^user appends the query parameters for maintype$")
+	public void user_appends_the_query_parameters_for_maintype(DataTable queryParams) throws Exception {
 
 		try{
-			Response res=getAutoMainTypesWithoutLocale();
-			validateAutoMainTypesWithoutLocale(res);
+			List<List<String>> data = queryParams.raw();
+			endpoint = getMainTypeEndpoint(data.get(0).get(0), data.get(0).get(1), data.get(0).get(2),data.get(0).get(3));
 		}
 
 		catch(Exception e){
 			Logger.getLogger(e.getMessage());
 		}
+
 	}
 
-	@Given("^when user hits the main types get call without the wakey but with the manufacturer code and locale the response returned is unauthorized\\.$")
-	public void when_user_hits_the_main_types_get_call_without_the_wakey_but_with_the_manufacturer_code_and_locale_the_response_returned_is_unauthorized() throws Throwable {
+	@Then("^user validates that the response is a bad request or internal server error$")
+	public void user_validates_that_the_response_is_a_bad_request_or_internal_server_error() throws Exception {
 
 		try{
-			Response res=getAutoMainTypesWithoutKey();
-			validateAutoMainTypesWithoutKey(res);
-		}
 
+			Assert.assertTrue("Invalid response received", validateAutoMainTypesWithoutManufacturerCode(resp)==true);
+		}
 		catch(Exception e){
 			Logger.getLogger(e.getMessage());
 		}
 	}
 
-	@Given("^when user hits the main type api with all required parameters where manufacturer code is of two digits the response returned is bad request or internal server error\\.$")
-	public void when_user_hits_the_main_type_api_with_all_required_parameters_where_manufacturer_code_is_of_two_digits_the_response_returned_is_bad_request_or_internal_server_error() {
 
-		try{
-			Response res=getAutoMainTypesWithTwoDigitManufactureCode();
-			validateWithTwoDigitOrInvalidThreeDigitManufactureCode(res);
-		}
+	// ***************************** End Of Test Scenarios**************************
 
-		catch(Exception e){
-			Logger.getLogger(e.getMessage());
-		}
-	}
 
-	@Given("^when user hits the main type api with arbitrary three digit manufacturer code that is not valid the response returned is a bad request or internal server error\\.$")
-	public void when_user_hits_the_main_type_api_with_arbitrary_three_digit_manufacturer_code_that_is_not_valid_the_response_returned_is_a_bad_request_or_internal_server_error() {
 
-		try{
-			Response res=getAutoMainTypesWithInvalidThreeDigitManufactureCode();
-			validateWithTwoDigitOrInvalidThreeDigitManufactureCode(res);
-		}
-
-		catch(Exception e){
-			Logger.getLogger(e.getMessage());
-		}
-	}
 
 
 
@@ -130,10 +142,5 @@ public class AutoManufactureApis extends APIAutoCommon {
 			Logger.getLogger(e.getMessage());
 		}
 	}
-
-	@Then("^user enters the manufacturer details and the main type details and hits the built in date$")
-	public void user_enters_the_manufacturer_details_and_the_main_type_details_and_hits_the_built_in_date() throws Throwable {
-
-
-	}
 }
+

@@ -21,9 +21,9 @@ import io.restassured.specification.RequestSpecification;
 import junit.framework.Assert;
 
 public class APIAutoCommon {
-	
-	
-	String url = CommonUtilities.baseUrl;
+
+
+	protected String url = CommonUtilities.baseUrl;
 	private static Set<String> manufacturerCode = new HashSet<String>();
 	private static Set<String> mainTypeCode = new HashSet<String>();
 	private static List<Set<String>> mainTypeCodes = new ArrayList<Set<String>>();
@@ -32,119 +32,6 @@ public class APIAutoCommon {
 		HashMap<String, Object> headers = new HashMap<String,Object>();
 		headers.put("Content-Type", "application/json");
 		return headers;
-	}
-
-
-	public Response getAutoManufacturerDetails() throws Exception{
-		String endPoint = null;
-		HashMap<String, Object> headers	= new HashMap<String,Object>();
-		headers = headersForms();
-		Response response = null;
-		RestAssured.baseURI = url;
-		endPoint = "/v1/car-types/manufacturer?wa_key="+CommonUtilities.waKey+"&locale="+CommonUtilities.locale;
-		String newURL = url+endPoint;
-		response = RestAssured.given().
-				when().log().all().headers(headers).get(newURL);
-
-		return response;
-	}
-
-	public Response getAutoManufacturerDetailsWithoutKey() throws Exception{
-		String endPoint = null;
-		HashMap<String, Object> headers	= new HashMap<String,Object>();
-		headers = headersForms();
-		Response response = null;
-		RestAssured.baseURI = url;
-		endPoint = "/v1/car-types/manufacturer?locale="+CommonUtilities.locale;
-		String newURL = url+endPoint;
-		response = RestAssured.given().
-				when().log().all().headers(headers).get(newURL);
-
-		return response;
-	}
-
-	public Response getAutoManufacturerDetailsWithoutLocale() throws Exception{
-		String endPoint = null;
-		Response response = null;
-		RestAssured.baseURI = url;
-		HashMap<String, Object> headers	= new HashMap<String,Object>();
-		headers = headersForms();
-		endPoint = "/v1/car-types/manufacturer?wa_key="+CommonUtilities.waKey;	
-		String newURL = url+endPoint;
-		response = RestAssured.given().
-				when().log().all().headers(headers).get(newURL);
-
-		return response;
-	}
-
-	public Response getAutoMainTypesWithoutManufacturerCode() throws Exception{
-		String endPoint = null;
-		Response response = null;
-		RestAssured.baseURI = url;
-		HashMap<String, Object> headers	= new HashMap<String,Object>();
-		headers = headersForms();
-		endPoint = "/v1/car-types/main-types?locale="+CommonUtilities.locale+"&wa_key="+CommonUtilities.waKey;	
-		String newURL = url+endPoint;
-		response = RestAssured.given().
-				when().log().all().headers(headers).get(newURL);
-
-		return response;
-	}
-
-	public Response getAutoMainTypesWithoutLocale() throws Exception{
-		String endPoint = null;
-		Response response = null;
-		RestAssured.baseURI = url;
-		HashMap<String, Object> headers	= new HashMap<String,Object>();
-		headers = headersForms();
-		endPoint = "/v1/car-types/main-types?manufacturer=020&wa_key="+CommonUtilities.waKey;	
-		String newURL = url+endPoint;
-		response = RestAssured.given().
-				when().log().all().headers(headers).get(newURL);
-
-		return response;
-	}
-
-	public Response getAutoMainTypesWithoutKey() throws Exception{
-		String endPoint = null;
-		Response response = null;
-		RestAssured.baseURI = url;
-		HashMap<String, Object> headers	= new HashMap<String,Object>();
-		headers = headersForms();
-		endPoint = "/v1/car-types/main-types?manufacturer=020&locale="+CommonUtilities.locale;	
-		String newURL = url+endPoint;
-		response = RestAssured.given().
-				when().log().all().headers(headers).get(newURL);
-
-		return response;
-	}
-
-	public Response getAutoMainTypesWithTwoDigitManufactureCode() throws Exception{
-		String endPoint = null;
-		Response response = null;
-		RestAssured.baseURI = url;
-		HashMap<String, Object> headers	= new HashMap<String,Object>();
-		headers = headersForms();
-		endPoint = "/v1/car-types/main-types?manufacturer=20&locale="+CommonUtilities.locale+"&wa_key="+CommonUtilities.waKey;	
-		String newURL = url+endPoint;
-		response = RestAssured.given().
-				when().log().all().headers(headers).get(newURL);
-
-		return response;
-	}
-	
-	public Response getAutoMainTypesWithInvalidThreeDigitManufactureCode() throws Exception{
-		String endPoint = null;
-		Response response = null;
-		RestAssured.baseURI = url;
-		HashMap<String, Object> headers	= new HashMap<String,Object>();
-		headers = headersForms();
-		endPoint = "/v1/car-types/main-types?manufacturer=123&locale="+CommonUtilities.locale+"&wa_key="+CommonUtilities.waKey;	
-		String newURL = url+endPoint;
-		response = RestAssured.given().
-				when().log().all().headers(headers).get(newURL);
-
-		return response;
 	}
 
 	public List<Response> getAutoMainTypeDetails() throws Exception{
@@ -172,7 +59,7 @@ public class APIAutoCommon {
 
 	}
 
-	public Response validateAutoManufacturer(Response resp) throws Exception{
+	public boolean validateAutoManufacturer(Response resp) throws Exception{
 
 		boolean isMatching = false;
 		int statusCode = resp.getStatusCode();
@@ -185,12 +72,12 @@ public class APIAutoCommon {
 		}
 
 		Assert.assertTrue("Manufacturer Code is not matching",isMatching);
-		return resp;
+		return isMatching;
 
 
 	}
 
-	public Response validateAutoManufacturerWithoutKey(Response resp) throws Exception{
+	public boolean validateAutoManufactureAndMainTypesWithoutKey(Response resp) throws Exception{
 
 		boolean isMatching = false;
 		int statusCode = resp.getStatusCode();
@@ -199,24 +86,11 @@ public class APIAutoCommon {
 		}
 
 		Assert.assertTrue("Unauthorized Response For Manufacturer is not shown up",isMatching);
-		return resp;
-
-	}
-	
-	public Response validateAutoManufacturerWithoutLocale(Response resp) throws Exception{
-
-		boolean isMatching = false;
-		int statusCode = resp.getStatusCode();
-		if (statusCode==400 || statusCode==500) {				
-			isMatching = true;
-		}
-
-		Assert.assertTrue("Bad Request Or Internal server error is not showing up",isMatching);
-		return resp;
+		return isMatching;
 
 	}
 
-	public Response validateAutoMainTypesWithoutManufacturerCode(Response resp) throws Exception{
+	public boolean validateAutoMainTypesWithoutManufacturerCode(Response resp) throws Exception{
 
 		boolean isMatching = false;
 		JsonPath jsonPathEvaluator = resp.jsonPath();
@@ -228,24 +102,11 @@ public class APIAutoCommon {
 		}
 
 		Assert.assertTrue("Unauthorized Response For Main Types is not shown up", isMatching);
-		return resp;
+		return isMatching;
 
 	}
 
-	public Response validateAutoMainTypesWithoutKey(Response resp) throws Exception{
-
-		boolean isMatching = false;
-		int statusCode = resp.getStatusCode();
-		if (statusCode==401) {				
-			isMatching = true;
-		}
-
-		Assert.assertTrue("Unauthorized Response For Manufacturer is not shown up",isMatching);
-		return resp;
-
-	}
-	
-	public Response validateAutoMainTypesWithoutLocale(Response resp) throws Exception{
+	public boolean validateAutoManufacturerandMainTypeWithoutLocale(Response resp) throws Exception{
 
 		boolean isMatching = false;
 		int statusCode = resp.getStatusCode();
@@ -254,23 +115,11 @@ public class APIAutoCommon {
 		}
 
 		Assert.assertTrue("Bad Request Or Internal Server error is not showing up in the response",isMatching);
-		return resp;
+		return isMatching;
 
 	}
 
-	public Response validateWithTwoDigitOrInvalidThreeDigitManufactureCode(Response resp) throws Exception{
-
-		boolean isMatching = false;
-		int statusCode = resp.getStatusCode();
-		if (statusCode==400 || statusCode==500) {				
-			isMatching = true;
-		}
-
-		Assert.assertTrue("Status Code is returning 200", isMatching);
-		return resp;
-
-	}
-
+	
 
 	public List<Response> validateMainType(List<Response>resp) throws Exception{
 		Map<String,String> mainTypeMap = new HashMap<String,String>();
@@ -290,4 +139,60 @@ public class APIAutoCommon {
 		return resp;
 
 	}
+
+	public String getManufactureEndpoint(String ... args)
+	{
+
+		if(args[2].equals("1")){
+			return "v1/car-types/manufacturer?wa_key=" + args[0] + "&locale=" + args[1];
+		}
+
+		else if(args[2].equals("2")){
+
+			return "v1/car-types/manufacturer?wa_key=" + args[0] ;
+		}
+
+		else{
+			return "v1/car-types/manufacturer?locale=" + args[1];
+		}
+
+	}
+
+	public String getMainTypeEndpoint(String ... args)
+	{
+
+		if(args[3].equals("1")){
+			return "v1/car-types/main-types?manufacturer=" +args[2] + "&wa_key=" + args[0] + "&locale=" + args[1];
+		}
+
+		else if(args[3].equals("2")){
+
+			return "v1/car-types/main-types?wa_key=" + args[0] + "&locale=" + args[1];
+		}
+
+		else if(args[3].equals("3")){
+
+			return "v1/car-types/main-types?manufacturer=" +args[2] + "&locale=" + args[1];
+		}
+
+		else{
+			return "v1/car-types/main-types?manufacturer=" +args[2] + "&wa_key=" + args[0];
+		}
+
+	}
+
+	public Response sendManufactureRequest(String baseUri, String endpoint) throws Exception{
+		HashMap<String, Object> headers	= new HashMap<String,Object>();
+		headers = headersForms();
+		Response response = null;
+		RestAssured.baseURI = baseUri;
+		response = RestAssured.given().
+				when().log().all().headers(headers).get(endpoint);
+
+		return response;
+	}
+
+
 }
+
+
