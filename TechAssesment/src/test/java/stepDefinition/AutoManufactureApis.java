@@ -54,7 +54,7 @@ public class AutoManufactureApis extends APIAutoCommon {
 	public void sends_a_GET_http_request() throws Exception {
 		try
 		{
-			resp = sendManufactureRequest(baseUri, endpoint);
+			resp = sendRequest(baseUri, endpoint);
 		}
 		catch(Exception e)
 		{
@@ -193,7 +193,7 @@ public class AutoManufactureApis extends APIAutoCommon {
 
 
 
-	@When("^user gets the manufacturer details and hits the car type get call$")
+	/*@When("^user gets the manufacturer details and hits the car type get call$")
 	public void user_gets_the_manufacturer_details_and_hits_the_car_type_get_call() {
 
 		try{
@@ -203,6 +203,6 @@ public class AutoManufactureApis extends APIAutoCommon {
 		catch(Exception e){
 			Logger.getLogger(e.getMessage());
 		}
-	}
+	}*/
 }
 

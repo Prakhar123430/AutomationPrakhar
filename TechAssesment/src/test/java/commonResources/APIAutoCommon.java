@@ -202,17 +202,6 @@ public class APIAutoCommon {
 	}
 
 
-	public Response sendManufactureRequest(String baseUri, String endpoint) throws Exception{
-		HashMap<String, Object> headers	= new HashMap<String,Object>();
-		headers = headersForms();
-		Response response = null;
-		RestAssured.baseURI = baseUri;
-		response = RestAssured.given().
-				when().log().all().headers(headers).get(endpoint);
-
-		return response;
-	}
-
 
 	public List<String> getCumulativeMismatchAfterResponse(String baseUrl, DataTable queryParams, Set<String> codes) throws Exception
 	{
@@ -222,14 +211,14 @@ public class APIAutoCommon {
 		for(String code : codes)
 		{
 			String endpoint = getMainTypeEndpoint(data.get(0).get(0), data.get(0).get(1), code);
-			Response resp = sendMainTypeRequest(baseUrl, endpoint);
+			Response resp = sendRequest(baseUrl, endpoint);
 			if(validateMainType(resp)==false)
 				errorList.add("Response mismatch for "+code);
 		}
 		return errorList;
 	}
 
-	public Response sendMainTypeRequest(String baseUri, String endpoint) throws Exception{
+	public Response sendRequest(String baseUri, String endpoint) throws Exception{
 		HashMap<String, Object> headers	= new HashMap<String,Object>();
 		headers = headersForms();
 		Response response = null;
