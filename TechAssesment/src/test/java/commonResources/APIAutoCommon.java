@@ -77,7 +77,7 @@ public class APIAutoCommon {
 
 	}
 
-	public boolean validateAutoManufactureAndMainTypesWithoutKey(Response resp) throws Exception{
+	public boolean validateAutoManufactureMainAndBuiltInWithoutKey(Response resp) throws Exception{
 
 		boolean isMatching = false;
 		int statusCode = resp.getStatusCode();
@@ -90,7 +90,7 @@ public class APIAutoCommon {
 
 	}
 
-	public boolean validateAutoMainTypesWithoutManufacturerCode(Response resp) throws Exception{
+	public boolean validateAutoMainTypesAndBuiltInWithoutManufacturerCodeAndMainType(Response resp) throws Exception{
 
 		boolean isMatching = false;
 		JsonPath jsonPathEvaluator = resp.jsonPath();
@@ -100,13 +100,18 @@ public class APIAutoCommon {
 		if (statusCode==400 && error.equalsIgnoreCase("Bad Request") && message.equalsIgnoreCase("Required String parameter 'manufacturer' is not present")) {				
 			isMatching = true;
 		}
+		
+		else if (statusCode==400 && error.equalsIgnoreCase("Bad Request") && message.equalsIgnoreCase("Required String parameter 'main-type' is not present")) {				
+			isMatching = true;
+		}
+		
 
 		Assert.assertTrue("Unauthorized Response For Main Types is not shown up", isMatching);
 		return isMatching;
 
 	}
 
-	public boolean validateAutoManufacturerandMainTypeWithoutLocale(Response resp) throws Exception{
+	public boolean validateAutoManufacturerMainAndBuiltInWithoutLocale(Response resp) throws Exception{
 
 		boolean isMatching = false;
 		int statusCode = resp.getStatusCode();
@@ -180,6 +185,37 @@ public class APIAutoCommon {
 		}
 
 	}
+	
+	public String getBuiltInEndpoint(String ... args)
+	{
+
+		if(args[4].equals("1")){
+			return "v1/car-types/built-dates?manufacturer=" +args[2] + "&wa_key=" + args[0] + "&locale=" + args[1] +  "&main-type=" + args[3];
+		}
+
+		else if(args[4].equals("2")){
+
+			return "v1/car-types/built-dates?wa_key=" + args[0] + "&locale=" + args[1] +  "&main-type=" + args[3];
+		}
+
+		else if(args[4].equals("3")){
+
+			return "v1/car-types/built-dates?manufacturer=" +args[2]  + "&locale=" + args[1] +  "&main-type=" + args[3];
+		}
+		
+		else if(args[4].equals("4")){
+
+			return "v1/car-types/built-dates?manufacturer=" +args[2] + "&wa_key=" + args[0] +  "&main-type=" + args[3];
+		}
+
+		else{
+			
+			return "v1/car-types/built-dates?manufacturer=" +args[2] + "&wa_key=" + args[0] + "&locale=" + args[1];
+			
+		}
+
+	}
+
 
 	public Response sendManufactureRequest(String baseUri, String endpoint) throws Exception{
 		HashMap<String, Object> headers	= new HashMap<String,Object>();

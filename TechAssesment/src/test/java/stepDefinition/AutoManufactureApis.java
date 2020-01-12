@@ -74,7 +74,7 @@ public class AutoManufactureApis extends APIAutoCommon {
 
 		try{
 
-			Assert.assertTrue("Invalid response received", validateAutoManufactureAndMainTypesWithoutKey(resp)==true);
+			Assert.assertTrue("Invalid response received", validateAutoManufactureMainAndBuiltInWithoutKey(resp)==true);
 		}
 
 		catch(Exception e){
@@ -88,7 +88,7 @@ public class AutoManufactureApis extends APIAutoCommon {
 
 		try{
 
-			Assert.assertTrue("Invalid response received", validateAutoManufacturerandMainTypeWithoutLocale(resp)==true);
+			Assert.assertTrue("Invalid response received", validateAutoManufacturerMainAndBuiltInWithoutLocale(resp)==true);
 
 		}
 
@@ -116,11 +116,25 @@ public class AutoManufactureApis extends APIAutoCommon {
 
 		try{
 
-			Assert.assertTrue("Invalid response received", validateAutoMainTypesWithoutManufacturerCode(resp)==true);
+			Assert.assertTrue("Invalid response received", validateAutoMainTypesAndBuiltInWithoutManufacturerCodeAndMainType(resp)==true);
 		}
 		catch(Exception e){
 			Logger.getLogger(e.getMessage());
 		}
+	}
+	
+	@When("^user appends the query parameters for built in$")
+	public void user_appends_the_query_parameters_for_built_in(DataTable queryParams) throws Exception {
+	    
+		try{
+			List<List<String>> data = queryParams.raw();
+			endpoint = getBuiltInEndpoint(data.get(0).get(0), data.get(0).get(1), data.get(0).get(2),data.get(0).get(3),data.get(0).get(4));
+		}
+
+		catch(Exception e){
+			Logger.getLogger(e.getMessage());
+		}
+
 	}
 
 
