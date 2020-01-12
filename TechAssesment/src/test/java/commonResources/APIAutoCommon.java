@@ -201,8 +201,6 @@ public class APIAutoCommon {
 
 	}
 
-
-
 	public List<String> getCumulativeMismatchAfterResponse(String baseUrl, DataTable queryParams, Set<String> codes) throws Exception
 	{
 		List<String> errorList = new ArrayList<String>();
@@ -238,7 +236,7 @@ public class APIAutoCommon {
 		return isMatching;
 
 	}
-	
+
 	public Set<String> getManufacturerCode(Response resp) throws Exception{
 		Set<String> manufacturerCodes = new HashSet<String>();
 		Map<String,String> mainTypeMap = new HashMap<String,String>();
