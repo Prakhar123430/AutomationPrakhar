@@ -142,6 +142,7 @@ public class AutoManufactureApis extends APIAutoCommon {
 		
 		try{
 			
+			List<Response> res = fetchManufacturerDetails(resp);
 		}
 		
 		catch(Exception e){

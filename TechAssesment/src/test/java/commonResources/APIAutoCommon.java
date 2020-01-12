@@ -1,7 +1,11 @@
 package commonResources;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -12,11 +16,14 @@ import java.util.Set;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonArray;
 
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import io.restassured.response.ResponseOptions;
 import io.restassured.specification.RequestSpecification;
 import junit.framework.Assert;
 
@@ -205,6 +212,12 @@ public class APIAutoCommon {
 				when().log().all().headers(headers).get(endpoint);
 
 		return response;
+	}
+	
+	public List<Response> fetchManufacturerDetails(List<Response>resp) throws Exception{
+		
+		return resp;
+		
 	}
 
 
