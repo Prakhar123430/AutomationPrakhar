@@ -86,4 +86,10 @@ Scenario: Checking built in dropdown without main type
 	  And sends a GET http request
 	  Then user validates that the response is a bad request or internal server error
 	  
+Scenario: Selection for main type for every manufacturer code
+     Given user sets the GET baseURL
+     When user fetches a list of manufacture codes from manufacture API
+     And user passes response for each manufacturer code to maintype API
+     Then user validates response of main type for each manufacturer code
+	  
 	  

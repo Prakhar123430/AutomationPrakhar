@@ -136,6 +136,47 @@ public class AutoManufactureApis extends APIAutoCommon {
 		}
 
 	}
+	
+	@When("^user fetches a list of manufacture codes from manufacture API$")
+	public void user_fetches_a_list_of_manufacture_codes_from_manufacture_API() throws Exception {
+		
+		try{
+			
+		}
+		
+		catch(Exception e){
+			
+			Logger.getLogger(e.getMessage());
+		}
+	    
+	}
+	
+	@When("^user passes response for each manufacturer code to maintype API$")
+	public void user_passes_response_for_each_manufacturer_code_to_maintype_API() throws Exception {
+		
+		try{
+			
+		}
+		
+		catch(Exception e){
+			
+			Logger.getLogger(e.getMessage());
+		}
+	    
+	}
+
+	@Then("^user validates response of main type for each manufacturer code$")
+	public void user_validates_response_of_main_type_for_each_manufacturer_code() throws Exception {
+	    
+		try{
+			
+		}
+		
+		catch(Exception e){
+			
+			
+		}
+	}
 
 
 	// ***************************** End Of Test Scenarios**************************

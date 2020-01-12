@@ -61,16 +61,9 @@ public class APIAutoCommon {
 
 	public boolean validateAutoManufacturer(Response resp) throws Exception{
 
-		boolean isMatching = false;
+		boolean isMatching=false;
 		int statusCode = resp.getStatusCode();
-		JsonPath jsonPathEvaluator = resp.jsonPath();
-		Map<String,String> manufacturerMap = new HashMap<String,String>();
-		if (statusCode==200) {				
-			manufacturerMap = jsonPathEvaluator.get("wkda");
-			manufacturerCode = manufacturerMap.keySet();
-			isMatching = true;
-		}
-
+		isMatching = CommonUtilities.statusCode200(statusCode,isMatching);
 		Assert.assertTrue("Manufacturer Code is not matching",isMatching);
 		return isMatching;
 
@@ -81,11 +74,8 @@ public class APIAutoCommon {
 
 		boolean isMatching = false;
 		int statusCode = resp.getStatusCode();
-		if (statusCode==401) {				
-			isMatching = true;
-		}
-
-		Assert.assertTrue("Unauthorized Response For Manufacturer is not shown up",isMatching);
+		isMatching = CommonUtilities.statusCode401(statusCode);
+	    Assert.assertTrue("Unauthorized Response For Manufacturer is not shown up",	isMatching);
 		return isMatching;
 
 	}
@@ -97,15 +87,7 @@ public class APIAutoCommon {
 		int statusCode = resp.getStatusCode();
 		String error = jsonPathEvaluator.get("error");
 		String message = jsonPathEvaluator.get("message");
-		if (statusCode==400 && error.equalsIgnoreCase("Bad Request") && message.equalsIgnoreCase("Required String parameter 'manufacturer' is not present")) {				
-			isMatching = true;
-		}
-		
-		else if (statusCode==400 && error.equalsIgnoreCase("Bad Request") && message.equalsIgnoreCase("Required String parameter 'main-type' is not present")) {				
-			isMatching = true;
-		}
-		
-
+		isMatching = CommonUtilities.badRequest(statusCode, error, message);
 		Assert.assertTrue("Unauthorized Response For Main Types is not shown up", isMatching);
 		return isMatching;
 
@@ -113,12 +95,9 @@ public class APIAutoCommon {
 
 	public boolean validateAutoManufacturerMainAndBuiltInWithoutLocale(Response resp) throws Exception{
 
-		boolean isMatching = false;
+		boolean isMatching=false;
 		int statusCode = resp.getStatusCode();
-		if (statusCode==400 || statusCode==500) {				
-			isMatching = true;
-		}
-
+		isMatching = CommonUtilities.badRequestOrInternalServerError(statusCode);
 		Assert.assertTrue("Bad Request Or Internal Server error is not showing up in the response",isMatching);
 		return isMatching;
 
