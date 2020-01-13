@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import org.apache.commons.logging.Log;
 import commonResources.APIAutoCommon;
+import commonResources.ManufacturerAndMainTypeCodes;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -23,6 +24,7 @@ public class AutoManufactureApis extends APIAutoCommon {
 	Response resp;
 	Set<String> manufacturerCodes;
 	List<String> errorList;
+	List<ManufacturerAndMainTypeCodes> codeList = new ArrayList<ManufacturerAndMainTypeCodes>();
 
 
 	@Given("^user sets the GET baseURL$")
@@ -67,7 +69,7 @@ public class AutoManufactureApis extends APIAutoCommon {
 	public void user_validates_the_response() throws Exception {
 		try
 		{
-			Assert.assertTrue("Invalid response received", validateAutoManufacturer(resp)==true);
+			Assert.assertTrue("Invalid response received", validateAutoMainTypesAndBuiltInWithoutManufacturerCodeAndMainType(resp)==true);
 		}
 		catch(Exception e)
 		{
@@ -128,10 +130,10 @@ public class AutoManufactureApis extends APIAutoCommon {
 			Logger.getLogger(e.getMessage());
 		}
 	}
-	
+
 	@When("^user appends the query parameters for built in$")
 	public void user_appends_the_query_parameters_for_built_in(DataTable queryParams) throws Exception {
-	    
+
 		try{
 			List<List<String>> data = queryParams.raw();
 			endpoint = getBuiltInEndpoint(data.get(0).get(0), data.get(0).get(1), data.get(0).get(2),data.get(0).get(3),data.get(0).get(4));
@@ -142,67 +144,86 @@ public class AutoManufactureApis extends APIAutoCommon {
 		}
 
 	}
-	
+
 	@When("^user fetches a list of manufacture codes from manufacture API$")
 	public void user_fetches_a_list_of_manufacture_codes_from_manufacture_API() throws Exception {
-		
+
 		try{
 			manufacturerCodes = new HashSet<String>();
 			manufacturerCodes = getManufacturerCode(resp);
 		}
-		
+
 		catch(Exception e){
-			
+
 			Logger.getLogger(e.getMessage());
 		}
-	    
+
 	}
-	
+
 	@When("^user sends a GET http request using the manufacturer code$")
 	public void user_sends_a_GET_http_request_using_the_manufacturer_code(DataTable queryParams) throws Throwable {
 		try{
 			errorList = new ArrayList<String>();
 			errorList = getCumulativeMismatchAfterResponse(baseUri, queryParams, manufacturerCodes);
-			
+
 		}
-		
+
 		catch(Exception e){
-			
+
 			Logger.getLogger(e.getMessage());
 		}
 	}
 
 	@Then("^user validates response of main type for each manufacturer code$")
 	public void user_validates_response_of_main_type_for_each_manufacturer_code() throws Exception {
-	    
+
 		try{
 			boolean valid=false;
 			if(errorList.size()==0)
 				valid = true;
 			Assert.assertTrue("Invalid response received for Maintype", valid==true);
 		}
-		
+
 		catch(Exception e){
 			Logger.getLogger(e.getMessage());
 		}
 	}
-	// ***************************** End Of Test Scenarios**************************
 
 
-
-
-
-
-	/*@When("^user gets the manufacturer details and hits the car type get call$")
-	public void user_gets_the_manufacturer_details_and_hits_the_car_type_get_call() {
-
+	@Then("^user sends a GET http request using the manufacture code and main type codes$")
+	public void user_sends_a_GET_http_request_using_the_manufacture_code_and_main_type_codes(DataTable queryParams) throws Exception {
 		try{
-			List<Response> mainTypeRes = getAutoMainTypeDetails();
-			validateMainType(mainTypeRes);
+			
+			errorList = new ArrayList<String>();
+			errorList = getCumulativeMismatchForBuiltInAfterResponse(baseUri, queryParams);
+
+
 		}
+
 		catch(Exception e){
 			Logger.getLogger(e.getMessage());
 		}
-	}*/
+
+	}
+
+	@Then("^user validates the response of built in API$")
+	public void user_validates_the_response_of_built_in_API() throws Exception  {
+		try{
+			boolean valid=false;
+			if(errorList.size()==0)
+				valid = true;
+			Assert.assertTrue("Invalid response received for Maintype", valid==true);
+		}
+
+		catch(Exception e){
+			Logger.getLogger(e.getMessage());
+		}
+
+	}
 }
+
+
+
+
+
 

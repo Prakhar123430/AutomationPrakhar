@@ -30,9 +30,9 @@ public class APIAutoCommon {
 
 
 	protected String url = CommonUtilities.baseUrl;
-	private static Set<String> manufacturerCode = new HashSet<String>();
-	private static Set<String> mainTypeCode = new HashSet<String>();
-	private static List<Set<String>> mainTypeCodes = new ArrayList<Set<String>>();
+	private Set<String> manufacturerCode = new HashSet<String>();
+	private Set<String> mainTypeCode = new HashSet<String>();
+	private List<ManufacturerAndMainTypeCodes> manufacturerAndMainTypeCode = new ArrayList<ManufacturerAndMainTypeCodes>();
 
 	public HashMap<String, Object> headersForms(){	
 		HashMap<String, Object> headers = new HashMap<String,Object>();
@@ -65,7 +65,7 @@ public class APIAutoCommon {
 
 	}
 
-	public boolean validateAutoManufacturer(Response resp) throws Exception{
+	public boolean validateAutoManufacturerMainTypeAndBuiltIn(Response resp) throws Exception{
 
 		boolean isMatching=false;
 		int statusCode = resp.getStatusCode();
@@ -193,6 +193,11 @@ public class APIAutoCommon {
 			return "v1/car-types/built-dates?manufacturer=" +args[2] + "&wa_key=" + args[0] +  "&main-type=" + args[3];
 		}
 
+		else if(args[4].equals("6")){
+
+			return "v1/car-types/built-dates?wa_key=" + args[0] + "&locale=" + args[1];
+		}
+
 		else{
 
 			return "v1/car-types/built-dates?manufacturer=" +args[2] + "&wa_key=" + args[0] + "&locale=" + args[1];
@@ -208,9 +213,16 @@ public class APIAutoCommon {
 
 		for(String code : codes)
 		{
-			String endpoint = getMainTypeEndpoint(data.get(0).get(0), data.get(0).get(1), code);
+			String endpoint = getMainTypeEndpoint(data.get(0).get(0), data.get(0).get(1),code,data.get(0).get(2));
 			Response resp = sendRequest(baseUrl, endpoint);
-			if(validateMainType(resp)==false)
+			System.out.println(resp.getBody().asString());
+			HashMap<String,String> mainType = resp.jsonPath().get("wkda");
+			Set<String> mainTypeCode=mainType.keySet();
+			for(String m : mainTypeCode){
+				ManufacturerAndMainTypeCodes obj = new ManufacturerAndMainTypeCodes(code, m);
+				manufacturerAndMainTypeCode.add(obj);
+			}
+			if(validateAutoManufacturerMainTypeAndBuiltIn(resp)==false)
 				errorList.add("Response mismatch for "+code);
 		}
 		return errorList;
@@ -227,15 +239,6 @@ public class APIAutoCommon {
 		return response;
 	}
 
-	public boolean validateMainType(Response resp) throws Exception{
-
-		boolean isMatching=false;
-		int statusCode = resp.getStatusCode();
-		isMatching = CommonUtilities.statusCode200(statusCode,isMatching);
-		Assert.assertTrue("MainType response is not matching",isMatching);
-		return isMatching;
-
-	}
 
 	public Set<String> getManufacturerCode(Response resp) throws Exception{
 		Set<String> manufacturerCodes = new HashSet<String>();
@@ -246,6 +249,21 @@ public class APIAutoCommon {
 		return mainTypeCode;
 	}
 
+
+
+	public List<String> getCumulativeMismatchForBuiltInAfterResponse(String baseUrl, DataTable queryParams) throws Exception{
+		List<String> errorList = new ArrayList<String>();
+		List<List<String>> data = queryParams.raw();
+		for(ManufacturerAndMainTypeCodes m: manufacturerAndMainTypeCode){
+			String endpoint = getBuiltInEndpoint(data.get(0).get(0), data.get(0).get(1),m.manufacturerCode,m.mainTypeCode,data.get(0).get(2));
+			Response resp = sendRequest(baseUrl, endpoint);
+			if(validateAutoManufacturerMainTypeAndBuiltIn(resp)==false)
+				errorList.add("Response mismatch for "+m.mainTypeCode);
+		}
+		return errorList;
+	}
 }
+
+
 
 
