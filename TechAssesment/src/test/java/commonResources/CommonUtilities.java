@@ -45,4 +45,11 @@ public class CommonUtilities {
 			return false;
 	}
 	
+	public static boolean statusCode403(int sc){
+		if(sc==403)
+			return true;
+		else
+			return false;
+	}
+	
 }

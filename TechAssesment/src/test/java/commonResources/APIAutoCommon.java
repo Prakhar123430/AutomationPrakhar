@@ -81,10 +81,21 @@ public class APIAutoCommon {
 		boolean isMatching = false;
 		int statusCode = resp.getStatusCode();
 		isMatching = CommonUtilities.statusCode401(statusCode);
-		Assert.assertTrue("Unauthorized Response For Manufacturer is not shown up",	isMatching);
+		Assert.assertTrue("Unauthorized Response is not shown up",	isMatching);
 		return isMatching;
 
 	}
+	
+	public boolean validateAutoManufactureMainAndBuiltInWithAnInvalidKey(Response resp) throws Exception{
+
+		boolean isMatching = false;
+		int statusCode = resp.getStatusCode();
+		isMatching = CommonUtilities.statusCode403(statusCode);
+		Assert.assertTrue("Forbidden Response is not shown up",	isMatching);
+		return isMatching;
+
+	}
+	
 
 	public boolean validateAutoMainTypesAndBuiltInWithoutManufacturerCodeAndMainType(Response resp) throws Exception{
 
@@ -215,7 +226,6 @@ public class APIAutoCommon {
 		{
 			String endpoint = getMainTypeEndpoint(data.get(0).get(0), data.get(0).get(1),code,data.get(0).get(2));
 			Response resp = sendRequest(baseUrl, endpoint);
-			System.out.println(resp.getBody().asString());
 			HashMap<String,String> mainType = resp.jsonPath().get("wkda");
 			Set<String> mainTypeCode=mainType.keySet();
 			for(String m : mainTypeCode){
@@ -242,11 +252,11 @@ public class APIAutoCommon {
 
 	public Set<String> getManufacturerCode(Response resp) throws Exception{
 		Set<String> manufacturerCodes = new HashSet<String>();
-		Map<String,String> mainTypeMap = new HashMap<String,String>();
+		Map<String,String> manufacturerMap = new HashMap<String,String>();
 		JsonPath jsonPathEvaluator = resp.jsonPath();
-		mainTypeMap = jsonPathEvaluator.get("wkda");
-		mainTypeCode = mainTypeMap.keySet();
-		return mainTypeCode;
+		manufacturerMap = jsonPathEvaluator.get("wkda");
+		manufacturerCodes = manufacturerMap.keySet();
+		return manufacturerCodes;
 	}
 
 

@@ -69,7 +69,7 @@ public class AutoManufactureApis extends APIAutoCommon {
 	public void user_validates_the_response() throws Exception {
 		try
 		{
-			Assert.assertTrue("Invalid response received", validateAutoMainTypesAndBuiltInWithoutManufacturerCodeAndMainType(resp)==true);
+			Assert.assertTrue("Invalid response received", validateAutoManufacturerMainTypeAndBuiltIn(resp)==true);
 		}
 		catch(Exception e)
 		{
@@ -219,6 +219,20 @@ public class AutoManufactureApis extends APIAutoCommon {
 			Logger.getLogger(e.getMessage());
 		}
 
+	}
+	
+	@Then("^user validates the response is forbidden\\.$")
+	public void user_validates_the_response_is_forbidden() throws Exception {
+		
+		try{
+			
+			Assert.assertTrue("Invalid response received", validateAutoManufactureMainAndBuiltInWithAnInvalidKey(resp)==true);
+		}
+		
+		catch(Exception e){
+			Logger.getLogger(e.getMessage());
+		}
+	    
 	}
 }
 
