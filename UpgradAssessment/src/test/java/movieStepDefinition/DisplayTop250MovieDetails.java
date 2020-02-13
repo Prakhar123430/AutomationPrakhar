@@ -44,6 +44,7 @@ public class DisplayTop250MovieDetails {
 	@Then("^user displays the top movie names in chronological sequence$")
 	public void user_displays_the_top_movies_in_chronological_sequence() throws Exception {
 		movieNamePages.fetchAllTopMoviesInAList(driver);
+		movieNamePages.writeDetailsToFile();
 }
 
 	@After

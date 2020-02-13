@@ -1,10 +1,15 @@
 package moviePages;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
+
+import javax.swing.JOptionPane;
 
 import org.apache.commons.lang3.math.NumberUtils;
 import org.openqa.selenium.By;
@@ -94,10 +99,6 @@ public class MovieNamesPage {
 				}
 			}
 
-			for(int i=0;i<movieNames.size();i++){
-				System.out.println(i + "."+ " " +movieNames.get(i) + " " + movieYears.get(i) + " " + movieRatings.get(i));
-			}
-
 		}
 
 		catch(Exception e){
@@ -127,6 +128,7 @@ public class MovieNamesPage {
 				for(int i=0;i<movieDetail.length-1;i++){
 					if(!NumberUtils.isCreatable(movieDetail[i])){
 						movieName = movieName + movieDetail[i] + " ";
+						movieName= movieName.replace(",", "");
 					}
 				}
 
@@ -140,6 +142,27 @@ public class MovieNamesPage {
 
 		catch(Exception e){
 			Logger.getLogger("Exception is" +e);
+		}
+	}
+	
+	public void writeDetailsToFile(){
+		
+		try{
+			FileWriter fileWriter = new FileWriter(ReusableData.movieDetailFilePath,false);
+			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+			PrintWriter printWriter = new PrintWriter(bufferedWriter);
+			for(int i=0;i<movieNames.size();i++){
+				printWriter.println(movieNames.get(i) + " " + "," + " "+movieYears.get(i) + "," +" " + movieRatings.get(i));
+			}
+			
+			printWriter.flush();
+			printWriter.close();
+			Logger.getLogger("Record Saved");
+		}
+		
+		catch(Exception e){
+			Logger.getLogger("Exception is" +e);
+			Logger.getLogger("Record Not Saved");
 		}
 	}
 }
