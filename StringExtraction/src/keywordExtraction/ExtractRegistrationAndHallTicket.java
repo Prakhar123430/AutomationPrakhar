@@ -7,12 +7,17 @@ import java.util.regex.Pattern;
 public class ExtractRegistrationAndHallTicket {
 
 	List<String> dataStoreList = new ArrayList<>();
-
+	
 	public void performExtraction(String applicationRequestText, String entranceExamName){
 
 		try{
-			String applicationRequest[] = applicationRequestText.split("\\s+");
+		    String applicationRequest[] = applicationRequestText.split("\\s+");
 			int applicationRequestLength= applicationRequest.length;
+			String lastWord=applicationRequest[applicationRequestLength-1];
+			if(lastWord.contains(".")){
+				lastWord=lastWord.replace(".", "");
+			}
+			applicationRequest[applicationRequestLength-1]=lastWord;
 			String chregex =  "^[a-zA-Z]+$";
 			String regex = "^[a-zA-Z0-9]+$";
 			Pattern pattern = Pattern.compile(regex);
@@ -38,7 +43,7 @@ public class ExtractRegistrationAndHallTicket {
 				}
 
 			}
-
+			
 			displayRegistrationAndHallTicketNumbers(entranceExamName);
 			dataStoreList.clear();
 		}
@@ -85,45 +90,89 @@ public class ExtractRegistrationAndHallTicket {
 				System.out.println(entranceExamName+ ":"+" " +"Registration Number is "+dataStoreList.get(3)+" "+"and Hallticket Number is "+dataStoreList.get(2));
 			}
 
-			else if(dataStoreList.get(0).equals("registration") && dataStoreList.get(2).equals("hall")){
+			else if(dataStoreList.get(0).equals("registration") && dataStoreList.get(2).equals("hall") && !dataStoreList.get(3).equals("application")){
 				System.out.println(entranceExamName+ ":"+" " +"Registration Number is "+dataStoreList.get(1)+" "+"and Hallticket Number is "+dataStoreList.get(3));
+			}
+			
+			else if(dataStoreList.get(0).equals("registration") && dataStoreList.get(2).equals("hall") && dataStoreList.get(3).equals("application")){
+				System.out.println(entranceExamName+ ":"+" " +"Registration Number is "+dataStoreList.get(1)+" "+"and Hallticket Number is "+dataStoreList.get(4));
 			}
 
 			else if(dataStoreList.get(0).equals("hall") && dataStoreList.get(2).equals("registration")){
 				System.out.println(entranceExamName+ ":"+" " +"Registration Number is "+dataStoreList.get(3)+" "+"and Hallticket Number is "+dataStoreList.get(1));
 			}
 
-			else if(dataStoreList.get(0).equals("registration") && dataStoreList.get(3).equals("hall")){
+			else if(dataStoreList.get(0).equals("registration") && dataStoreList.get(3).equals("hall") && !dataStoreList.get(2).equals("application")){
 				System.out.println(entranceExamName+ ":"+" " +"Registration Number is "+dataStoreList.get(1)+" "+"and Hallticket Number is "+dataStoreList.get(2));
+			}
+			
+			else if(dataStoreList.get(0).equals("registration") && dataStoreList.get(2).equals("hall") && dataStoreList.get(3).equals("application")){
+				System.out.println(entranceExamName+ ":"+" " +"Registration Number is "+dataStoreList.get(4)+" "+"and Hallticket Number is "+dataStoreList.get(1));
 			}
 
-			else if(dataStoreList.get(0).equals("hall") && dataStoreList.get(3).equals("registration")){
+			else if(dataStoreList.get(0).equals("hall") && dataStoreList.get(3).equals("registration") && !dataStoreList.get(2).equals("application")){
 				System.out.println(entranceExamName+ ":"+" " +"Registration Number is "+dataStoreList.get(2)+" "+"and Hallticket Number is "+dataStoreList.get(1));
 			}
 			
-			else if(dataStoreList.get(0).equals("application") && dataStoreList.get(3).equals("hall")){
+			else if(dataStoreList.get(0).equals("hall") && dataStoreList.get(2).equals("application") && dataStoreList.get(3).equals("registration")){
+				System.out.println(entranceExamName+ ":"+" " +"Registration Number is "+dataStoreList.get(4)+" "+"and Hallticket Number is "+dataStoreList.get(1));
+			}
+			
+			else if(dataStoreList.get(0).equals("application") && dataStoreList.get(3).equals("hall") && !dataStoreList.get(2).equals("registration")){
 				System.out.println(entranceExamName+ ":"+" " +"Registration Number is "+dataStoreList.get(1)+" "+"and Hallticket Number is "+dataStoreList.get(2));
 			}
 			
-			else if(dataStoreList.get(0).equals("hall") && dataStoreList.get(3).equals("application")){
+			else if(dataStoreList.get(0).equals("hall") && dataStoreList.get(3).equals("application") && !dataStoreList.get(2).equals("registration")){
 				System.out.println(entranceExamName+ ":"+" " +"Registration Number is "+dataStoreList.get(2)+" "+"and Hallticket Number is "+dataStoreList.get(1));
 			}
 			
-			else if(dataStoreList.get(0).equals("application") && dataStoreList.get(2).equals("hall")){
+			else if(dataStoreList.get(0).equals("application") && dataStoreList.get(2).equals("hall") && !dataStoreList.get(1).equals("registration")){
 				System.out.println(entranceExamName+ ":"+" " +"Registration Number is "+dataStoreList.get(1)+" "+"and Hallticket Number is "+dataStoreList.get(3));
 			}
 			
-			else if(dataStoreList.get(0).equals("hall") && dataStoreList.get(2).equals("application")){
+			else if(dataStoreList.get(0).equals("application") && dataStoreList.get(2).equals("registration") && dataStoreList.get(3).equals("hall")){
+				System.out.println(entranceExamName+ ":"+" " +"Registration Number is "+dataStoreList.get(1)+" "+"and Hallticket Number is "+dataStoreList.get(4));
+			}
+			
+			else if(dataStoreList.get(0).equals("hall") && dataStoreList.get(2).equals("application") && !dataStoreList.get(3).equals("registration")){
 				System.out.println(entranceExamName+ ":"+" " +"Registration Number is "+dataStoreList.get(3)+" "+"and Hallticket Number is "+dataStoreList.get(1));
 			}
 			
 
-			else if(dataStoreList.get(0).equals("registration") && dataStoreList.get(1).equals("hall")){
+			else if(dataStoreList.get(0).equals("registration") && dataStoreList.get(1).equals("hall") && !dataStoreList.get(2).equals("application")){
 				System.out.println(entranceExamName+ ":"+" " +"Registration Number is "+dataStoreList.get(2)+" "+"and Hallticket Number is "+dataStoreList.get(3));
 			}
 			
-			else if(dataStoreList.get(0).equals("hall") && dataStoreList.get(1).equals("registration")){
+			else if(dataStoreList.get(0).equals("hall") && dataStoreList.get(1).equals("registration") && !dataStoreList.get(2).equals("application")){
 				System.out.println(entranceExamName+ ":"+" " +"Registration Number is "+dataStoreList.get(3)+" "+"and Hallticket Number is "+dataStoreList.get(2));
+			}
+			
+			else if(dataStoreList.get(0).equals("application") && dataStoreList.get(1).equals("hall") && !dataStoreList.get(2).equals("registration") && !dataStoreList.get(3).equals("registration")){
+				System.out.println(entranceExamName+ ":"+" " +"Registration Number is "+dataStoreList.get(2)+" "+"and Hallticket Number is "+dataStoreList.get(3));
+			}
+			else if(dataStoreList.get(0).equals("application") && dataStoreList.get(1).equals("hall") && dataStoreList.get(2).equals("registration") && !dataStoreList.get(3).equals("registration")){
+				System.out.println(entranceExamName+ ":"+" " +"Registration Number is "+dataStoreList.get(4)+" "+"and Hallticket Number is "+dataStoreList.get(3));
+			}
+			
+			
+			else if(dataStoreList.get(0).equals("hall") && (dataStoreList.get(1).equals("application") ||dataStoreList.get(1).equals("registration")) && !dataStoreList.get(2).equals("registration") && !dataStoreList.get(3).equals("registration")){
+				System.out.println(entranceExamName+ ":"+" " +"Registration Number is "+dataStoreList.get(3)+" "+"and Hallticket Number is "+dataStoreList.get(2));
+			}
+			
+			else if((dataStoreList.get(2).equals("application")) && dataStoreList.get(3).equals("hall") && !dataStoreList.get(0).equals("registration")){
+				System.out.println(entranceExamName+ ":"+" " +"Registration Number is "+dataStoreList.get(0)+" "+"and Hallticket Number is "+dataStoreList.get(1));
+			}
+			
+			else if(dataStoreList.get(0).equals("registration") && dataStoreList.get(2).equals("application") && dataStoreList.get(3).equals("hall")){
+				System.out.println(entranceExamName+ ":"+" " +"Registration Number is "+dataStoreList.get(1)+" "+"and Hallticket Number is "+dataStoreList.get(4));
+			}
+			
+			else if(dataStoreList.get(0).equals("registration") && dataStoreList.get(2).equals("application") && dataStoreList.get(4).equals("hall")){
+				System.out.println(entranceExamName+ ":"+" " +"Registration Number is "+dataStoreList.get(1)+" "+"and Hallticket Number is "+dataStoreList.get(3));
+			}
+			
+			else if((dataStoreList.get(3).equals("application") || dataStoreList.get(3).equals("registration")) && dataStoreList.get(4).equals("hall")){
+				System.out.println(entranceExamName+ ":"+" " +"Registration Number is "+dataStoreList.get(1)+" "+"and Hallticket Number is "+dataStoreList.get(3));
 			}
 			
 			else{
