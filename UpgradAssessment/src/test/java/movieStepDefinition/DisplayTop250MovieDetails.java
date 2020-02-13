@@ -41,7 +41,7 @@ public class DisplayTop250MovieDetails {
 		movieNamePages.checkIfLandedToTopRatedMoviePage();
 	}
 
-	@Then("^user displays the top movie names in chronological sequence$")
+	@Then("^user displays the top movie names release year and ratings in chronological sequence$")
 	public void user_displays_the_top_movies_in_chronological_sequence() throws Exception {
 		movieNamePages.fetchAllTopMoviesInAList(driver);
 		movieNamePages.writeDetailsToFile();

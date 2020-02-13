@@ -3,5 +3,5 @@ Scenario: Fetch top 250 movie names
      Given user navigates to IMDB website
      When user navigates to Top Rated movies from the menu list
      When user verifies that he has landed to the correct page
-     Then user displays the top movie names in chronological sequence
-    
+     Then user displays the top movie names release year and ratings in chronological sequence
+ 
