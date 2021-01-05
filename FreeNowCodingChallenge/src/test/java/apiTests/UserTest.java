@@ -19,7 +19,6 @@ public class UserTest {
 		RequestSpecification specification = user.getUserDetailsApi();
 		UserBin userBin = user.getUserById(specification,EndPoints.GET_USER_PATH_PARAM);
 		int userId = userBin.getUserId();
-		System.out.println(userId);
 		Assert.assertEquals(userBin.getUserName(),Parameters.username);
 		
 
