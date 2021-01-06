@@ -90,7 +90,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">1 method,   1 passed</span>
+                    <span class="method-stats">2 methods,   2 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -101,7 +101,12 @@
                     <div class="method-list-content passed suite-FreeNowApi">
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-FreeNowApi" title="apiTests.UserTest" hash-for-method="validateUserName">validateUserName</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-FreeNowApi" title="apiTests.WorkflowTest" hash-for-method="validateUserName">validateUserName</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-FreeNowApi" title="apiTests.WorkflowTest" hash-for-method="validateUserPosts">validateUserPosts</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-FreeNowApi -->
@@ -119,7 +124,7 @@
           <div class="suite-FreeNowApi-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
-              <span class="class-name">apiTests.UserTest</span>
+              <span class="class-name">apiTests.WorkflowTest</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
@@ -127,6 +132,13 @@
                   <a name="validateUserName">
                   </a> <!-- validateUserName -->
                   <span class="method-name">validateUserName</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="validateUserPosts">
+                  </a> <!-- validateUserPosts -->
+                  <span class="method-name">validateUserPosts</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -148,7 +160,7 @@
     &lt;/packages&gt;
     &lt;classes&gt;
       &lt;class name=&quot;config.RestAssuredConfig&quot;/&gt;
-      &lt;class name=&quot;apiTests.UserTest&quot;/&gt;
+      &lt;class name=&quot;apiTests.WorkflowTest&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- FreeNowApiTests --&gt;
 &lt;/suite&gt; &lt;!-- FreeNowApi --&gt;
@@ -188,16 +200,20 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(1);
+data.addRows(2);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'validateUserName')
-data.setCell(0, 2, 'apiTests.UserTest')
-data.setCell(0, 3, 1844);
+data.setCell(0, 1, 'validateUserPosts')
+data.setCell(0, 2, 'apiTests.WorkflowTest')
+data.setCell(0, 3, 2472);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'validateUserName')
+data.setCell(1, 2, 'apiTests.WorkflowTest')
+data.setCell(1, 3, 2098);
 window.suiteTableData['FreeNowApi']= { tableData: data, tableDiv: 'times-div-FreeNowApi'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 1 seconds</span>
+              <span class="suite-total-time">Total running time: 4 seconds</span>
               <div id="times-div-FreeNowApi">
               </div> <!-- times-div-FreeNowApi -->
             </div> <!-- times-div -->
@@ -230,10 +246,14 @@ return data;
               </div> <!-- configuration-suite before -->
             </div> <!-- chronological-class -->
             <div class="chronological-class">
-              <div class="chronological-class-name">apiTests.UserTest</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">apiTests.WorkflowTest</div> <!-- chronological-class-name -->
               <div class="test-method">
                 <span class="method-name">validateUserName</span>
-                <span class="method-start">319 ms</span>
+                <span class="method-start">239 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">validateUserPosts</span>
+                <span class="method-start">2338 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

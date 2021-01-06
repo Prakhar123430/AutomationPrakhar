@@ -2,5 +2,6 @@ package common;
 
 public interface EndPoints {
 	
-	String GET_USER_PATH_PARAM ="/users/{userId}";
+	String GET_USER = "/users";
+	String GET_POSTS = "/posts";
 }
