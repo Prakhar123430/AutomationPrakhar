@@ -23,7 +23,7 @@
     <div class="top-banner-root">
       <span class="top-banner-title-font">Test results</span>
       <br/>
-      <span class="top-banner-font-1">1 suite</span>
+      <span class="top-banner-font-1">1 suite, 1 failed test</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -37,7 +37,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" class="navigator-link" panel-name="suite-FreeNowApi">
-              <span class="suite-name border-passed">FreeNowApi</span>
+              <span class="suite-name border-failed">FreeNowApi</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -90,7 +90,21 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">2 methods,   2 passed</span>
+                    <span class="method-stats">2 methods, 1 failed,   1 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-FreeNowApi" class="hide-methods failed suite-FreeNowApi"> (hide)</a> <!-- hide-methods failed suite-FreeNowApi -->
+                      <a href="#" panel-name="suite-FreeNowApi" class="show-methods failed suite-FreeNowApi"> (show)</a> <!-- show-methods failed suite-FreeNowApi -->
+                    </span>
+                    <div class="method-list-content failed suite-FreeNowApi">
+                      <span>
+                        <img width="3%" src="failed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-FreeNowApi" title="apiTests.WorkflowTest" hash-for-method="validateUserName">validateUserName</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-FreeNowApi -->
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -99,11 +113,6 @@
                       <a href="#" panel-name="suite-FreeNowApi" class="show-methods passed suite-FreeNowApi"> (show)</a> <!-- show-methods passed suite-FreeNowApi -->
                     </span>
                     <div class="method-list-content passed suite-FreeNowApi">
-                      <span>
-                        <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-FreeNowApi" title="apiTests.WorkflowTest" hash-for-method="validateUserName">validateUserName</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
                         <a href="#" class="method navigator-link" panel-name="suite-FreeNowApi" title="apiTests.WorkflowTest" hash-for-method="validateUserPosts">validateUserPosts</a> <!-- method navigator-link -->
@@ -121,9 +130,9 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-FreeNowApi" class="panel FreeNowApi">
-          <div class="suite-FreeNowApi-class-passed">
+          <div class="suite-FreeNowApi-class-failed">
             <div class="main-panel-header rounded-window-top">
-              <img src="passed.png"/>
+              <img src="failed.png"/>
               <span class="class-name">apiTests.WorkflowTest</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
@@ -132,8 +141,21 @@
                   <a name="validateUserName">
                   </a> <!-- validateUserName -->
                   <span class="method-name">validateUserName</span>
+                  <div class="stack-trace">java.lang.AssertionError: expected [null] but found [Samantha]
+	at assertions.ValidationCaller.verifyUserName(ValidationCaller.java:28)
+	at apiTests.WorkflowTest.validateUserName(WorkflowTest.java:15)
+... Removed 29 stack frames
+</div> <!-- stack-trace -->
                 </div> <!-- method-content -->
               </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-FreeNowApi-class-failed -->
+          <div class="suite-FreeNowApi-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">apiTests.WorkflowTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
                   <a name="validateUserPosts">
@@ -202,18 +224,18 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(2);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'validateUserPosts')
+data.setCell(0, 1, 'validateUserName')
 data.setCell(0, 2, 'apiTests.WorkflowTest')
-data.setCell(0, 3, 2472);
+data.setCell(0, 3, 2295);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'validateUserName')
+data.setCell(1, 1, 'validateUserPosts')
 data.setCell(1, 2, 'apiTests.WorkflowTest')
-data.setCell(1, 3, 2098);
+data.setCell(1, 3, 1652);
 window.suiteTableData['FreeNowApi']= { tableData: data, tableDiv: 'times-div-FreeNowApi'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 4 seconds</span>
+              <span class="suite-total-time">Total running time: 3 seconds</span>
               <div id="times-div-FreeNowApi">
               </div> <!-- times-div-FreeNowApi -->
             </div> <!-- times-div -->
@@ -248,12 +270,14 @@ return data;
             <div class="chronological-class">
               <div class="chronological-class-name">apiTests.WorkflowTest</div> <!-- chronological-class-name -->
               <div class="test-method">
+                <img src="failed.png">
+                </img>
                 <span class="method-name">validateUserName</span>
-                <span class="method-start">239 ms</span>
+                <span class="method-start">232 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">validateUserPosts</span>
-                <span class="method-start">2338 ms</span>
+                <span class="method-start">2529 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

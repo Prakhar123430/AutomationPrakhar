@@ -17,14 +17,32 @@ public class Utility {
 		 Recordset recordSet = connection.executeQuery(strQuery);
 		 
 		 while(recordSet.next()) {
-			 postBodies.add(recordSet.getField("Body").replace("\n", " "));
-			 
+			 postBodies.add(recordSet.getField("Body"));
+			
 		 }
 		 
 		 recordSet.close();
 		 connection.close();
 		 
 		 return postBodies;
+		
+	}
+	
+	public List<String> readPostTitle() throws FilloException{
+		 List<String> postTitles = new ArrayList<String>();
+		 Fillo fillo = new Fillo();
+		 Connection connection = fillo.getConnection("./src/test/resources/PostTitleAndBody/FreeNow.xlsx");
+		 String strQuery = "select * from Posts";
+		 Recordset recordSet = connection.executeQuery(strQuery);
+		 
+		 while(recordSet.next()) {
+			 postTitles.add(recordSet.getField("Title"));
+		 }
+		 
+		 recordSet.close();
+		 connection.close();
+		 
+		 return postTitles;
 		
 	}
 

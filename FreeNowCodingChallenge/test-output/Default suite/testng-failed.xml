@@ -3,11 +3,12 @@
 <suite name="Failed suite [Default suite]" parallel="none">
   <test name="Default test(failed)" parallel="none">
     <classes>
-      <class name="apiTests.UserTest">
+      <class name="apiTests.WorkflowTest">
         <methods>
+          <include name="validateUserPosts"/>
           <include name="validateUserName"/>
         </methods>
-      </class> <!-- apiTests.UserTest -->
+      </class> <!-- apiTests.WorkflowTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

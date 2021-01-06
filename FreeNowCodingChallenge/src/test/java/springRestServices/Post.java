@@ -39,4 +39,11 @@ public class Post {
 		
 		return bodies;
 	}
+	
+	public List<String> storePostTitles() throws FilloException {
+		Utility utility = new Utility();
+		List<String> titles =  utility.readPostTitle();
+		
+		return titles;
+	}
 }

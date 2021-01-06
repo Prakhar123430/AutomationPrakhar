@@ -5,7 +5,7 @@
     <classes>
       <class name="apiTests.WorkflowTest">
         <methods>
-          <include name="validateUserPosts"/>
+          <include name="validateUserName"/>
         </methods>
       </class> <!-- apiTests.WorkflowTest -->
       <class name="config.RestAssuredConfig">

@@ -1,0 +1,9 @@
+bin/PostBin.class
+springRestServices/User.class
+bin/UserBin.class
+common/EndPoints.class
+apiTests/WorkflowTest.class
+common/Parameters.class
+springRestServices/Post.class
+assertions/ValidationCaller.class
+common/Utility.class
