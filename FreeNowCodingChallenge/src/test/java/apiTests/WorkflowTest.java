@@ -11,13 +11,8 @@ public class WorkflowTest {
 	ValidationCaller validationCaller = new ValidationCaller();
 
 	@Test(priority=1)
-	public void validateUserName() {
+	public void validateUserBlogDetails() throws FilloException{
 		validationCaller.verifyUserName();
-
-	}
-
-	@Test(priority=2)
-	public void validateUserPosts() throws FilloException {
 		validationCaller.verifyUserPosts();
 
 	}

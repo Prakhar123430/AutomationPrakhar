@@ -10,7 +10,6 @@ import com.codoid.products.exception.FilloException;
 import bin.PostBin;
 import bin.UserBin;
 import common.EndPoints;
-import common.Parameters;
 import io.restassured.specification.RequestSpecification;
 import springRestServices.Post;
 import springRestServices.User;
@@ -19,6 +18,7 @@ public class ValidationCaller {
 	
 	RequestSpecification specification;
 	int userId;
+	List<Integer> postId = new ArrayList<Integer>();
 	
 	public void verifyUserName() {
 		User user = new User();
@@ -39,6 +39,7 @@ public class ValidationCaller {
 		specification = post.getUserPostsApi(userId);
 		PostBin[] postBin = post.getPostsByUserId(specification,EndPoints.GET_POSTS);
 		for(PostBin posts : postBin) {
+			postId.add(posts.getId());
 			String postBody = posts.getBody();
 			postBodies.add(postBody);
 			String postTitle = posts.getTitle();
