@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.testng.Assert;
+import org.testng.Reporter;
+
 import com.codoid.products.exception.FilloException;
 import bin.CommentsBin;
 import bin.PostBin;
@@ -87,11 +89,11 @@ public class ValidationCaller {
 
 	public void verifyIfCorrectEmail(boolean isMatching, String email) {
 		if(isMatching) {
-			System.out.println("Email format is correct for :" + " "+email);
+			Reporter.log("Email format is correct for :" + " "+email);
 		}
 
 		else {
-			System.out.println("Email format is incorrect for :" + " "+email);
+			Reporter.log("Email format is incorrect for :" + " "+email);
 		}
 
 	}
