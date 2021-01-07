@@ -2,18 +2,18 @@
 <testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="FreeNowApi" duration-ms="3678" started-at="2021-01-06T17:49:58Z" finished-at="2021-01-06T17:50:01Z">
+  <suite name="FreeNowApi" duration-ms="21791" started-at="2021-01-07T16:50:03Z" finished-at="2021-01-07T16:50:25Z">
     <groups>
     </groups>
-    <test name="FreeNowApiTests" duration-ms="3678" started-at="2021-01-06T17:49:58Z" finished-at="2021-01-06T17:50:01Z">
+    <test name="FreeNowApiTests" duration-ms="21791" started-at="2021-01-07T16:50:03Z" finished-at="2021-01-07T16:50:25Z">
       <class name="apiTests.WorkflowTest">
-        <test-method status="PASS" signature="validateUserBlogDetails()[pri:0, instance:apiTests.WorkflowTest@5a39699c]" name="validateUserBlogDetails" duration-ms="3672" started-at="2021-01-06T23:19:58Z" finished-at="2021-01-06T23:20:01Z">
+        <test-method status="PASS" signature="validateUserBlogDetails()[pri:0, instance:apiTests.WorkflowTest@5a39699c]" name="validateUserBlogDetails" duration-ms="21785" started-at="2021-01-07T22:20:03Z" finished-at="2021-01-07T22:20:25Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- validateUserBlogDetails -->
       </class> <!-- apiTests.WorkflowTest -->
       <class name="config.RestAssuredConfig">
-        <test-method status="PASS" signature="configure()[pri:0, instance:config.RestAssuredConfig@75bd9247]" name="configure" is-config="true" duration-ms="311" started-at="2021-01-06T23:19:57Z" finished-at="2021-01-06T23:19:58Z">
+        <test-method status="PASS" signature="configure()[pri:0, instance:config.RestAssuredConfig@75bd9247]" name="configure" is-config="true" duration-ms="326" started-at="2021-01-07T22:20:02Z" finished-at="2021-01-07T22:20:03Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- configure -->

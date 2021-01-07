@@ -14,6 +14,7 @@ public class WorkflowTest {
 	public void validateUserBlogDetails() throws FilloException{
 		validationCaller.verifyUserName();
 		validationCaller.verifyUserPosts();
+		validationCaller.addPostCommentsAndVerifyEmailFormat();
 
 	}
 

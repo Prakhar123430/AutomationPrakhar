@@ -1,33 +1,35 @@
 package springRestServices;
 
 import static io.restassured.RestAssured.given;
+
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
-import bin.UserBin;
+
+import bin.CommentsBin;
 import config.RestAssuredConfig;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
-public class User {
-
-	public RequestSpecification getUserDetailsApi() {
+public class Comments {
+	
+	public RequestSpecification getUserCommentsApi(int postId) {
 
 		RequestSpecification requestSpecification = new RestAssuredConfig().getRequestSpecification();
-		requestSpecification.queryParam("username", System.getProperty("propertyName")).log().all();
+		requestSpecification.queryParam("postId", postId).log().all();
 
 		return requestSpecification;
 
 	}
-
-	public UserBin getUserById(RequestSpecification specification, String endpoint) {
+	
+	public CommentsBin[] getCommentsByPostId(RequestSpecification specification, String endpoint) {
 
 	    Response response =  given().spec(specification).get(endpoint);
 		Assert.assertEquals(response.getStatusCode(),HttpStatus.SC_OK);
         response.then().log().all();
-        UserBin[] userBin = response.as(UserBin[].class);
+        CommentsBin[] commentsBin = response.as(CommentsBin[].class);
 
-		return userBin[0];
+		return commentsBin;
 
 	}
-	
+
 }
