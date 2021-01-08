@@ -1,19 +1,319 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
+    <line>
+      <![CDATA[Email format is correct for : Lura@rod.tv]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Lottie.Zieme@ruben.us]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Winona_Price@jevon.me]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Gabriel@oceane.biz]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Adolph.Ondricka@mozell.co.uk]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Allen@richard.biz]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Nicholaus@mikayla.ca]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Kayla@susanna.org]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Gideon@amina.name]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Cassidy@maribel.io]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Stefan.Crist@duane.ca]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Aniyah.Ortiz@monte.me]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Laverna@rico.biz]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Derek@hildegard.net]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Tyrell@abdullah.ca]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Reyes@hailey.name]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Danika.Dicki@mekhi.biz]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Alessandra.Nitzsche@stephania.us]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Matteo@marquis.net]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Joshua.Spinka@toby.io]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Annabelle@cole.com]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Kacey@jamal.info]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Mina@mallie.name]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Hudson.Blick@ruben.biz]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Domenic.Durgan@joaquin.name]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Alexie@alayna.org]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Haven_Barrows@brant.org]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Marianne@maximo.us]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Fanny@danial.com]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Trevion_Kuphal@bernice.name]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Emmet@guy.biz]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Megane.Fritsch@claude.name]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Amya@durward.ca]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Jasen_Rempel@willis.org]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Harmony@reggie.com]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Rosanna_Kunze@guy.net]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Ressie.Boehm@flossie.com]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Domenic.Wuckert@jazmyne.us]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Rhett.OKon@brian.info]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Mathias@richmond.info]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Ottis@lourdes.org]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Estel@newton.ca]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Bertha@erik.co.uk]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Joesph@matteo.info]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Alva@cassandre.net]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Vivienne@willis.org]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Angelita@aliza.me]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Timmothy_Okuneva@alyce.tv]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Moriah_Welch@richmond.org]]>
+    </line>
+    <line>
+      <![CDATA[Email format is correct for : Ramiro_Kuhn@harmon.biz]]>
+    </line>
   </reporter-output>
-  <suite name="FreeNowApi" duration-ms="21791" started-at="2021-01-07T16:50:03Z" finished-at="2021-01-07T16:50:25Z">
+  <suite name="FreeNowApi" duration-ms="18226" started-at="2021-01-08T07:43:51Z" finished-at="2021-01-08T07:44:09Z">
     <groups>
     </groups>
-    <test name="FreeNowApiTests" duration-ms="21791" started-at="2021-01-07T16:50:03Z" finished-at="2021-01-07T16:50:25Z">
+    <test name="FreeNowApiTests" duration-ms="18226" started-at="2021-01-08T07:43:51Z" finished-at="2021-01-08T07:44:09Z">
       <class name="apiTests.WorkflowTest">
-        <test-method status="PASS" signature="validateUserBlogDetails()[pri:0, instance:apiTests.WorkflowTest@5a39699c]" name="validateUserBlogDetails" duration-ms="21785" started-at="2021-01-07T22:20:03Z" finished-at="2021-01-07T22:20:25Z">
+        <test-method status="PASS" signature="validateUserBlogDetails()[pri:0, instance:apiTests.WorkflowTest@5a39699c]" name="validateUserBlogDetails" duration-ms="18220" started-at="2021-01-08T13:13:51Z" finished-at="2021-01-08T13:14:09Z">
           <reporter-output>
+            <line>
+              <![CDATA[Email format is correct for : Lura@rod.tv]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Lottie.Zieme@ruben.us]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Winona_Price@jevon.me]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Gabriel@oceane.biz]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Adolph.Ondricka@mozell.co.uk]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Allen@richard.biz]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Nicholaus@mikayla.ca]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Kayla@susanna.org]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Gideon@amina.name]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Cassidy@maribel.io]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Stefan.Crist@duane.ca]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Aniyah.Ortiz@monte.me]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Laverna@rico.biz]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Derek@hildegard.net]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Tyrell@abdullah.ca]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Reyes@hailey.name]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Danika.Dicki@mekhi.biz]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Alessandra.Nitzsche@stephania.us]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Matteo@marquis.net]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Joshua.Spinka@toby.io]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Annabelle@cole.com]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Kacey@jamal.info]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Mina@mallie.name]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Hudson.Blick@ruben.biz]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Domenic.Durgan@joaquin.name]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Alexie@alayna.org]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Haven_Barrows@brant.org]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Marianne@maximo.us]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Fanny@danial.com]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Trevion_Kuphal@bernice.name]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Emmet@guy.biz]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Megane.Fritsch@claude.name]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Amya@durward.ca]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Jasen_Rempel@willis.org]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Harmony@reggie.com]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Rosanna_Kunze@guy.net]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Ressie.Boehm@flossie.com]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Domenic.Wuckert@jazmyne.us]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Rhett.OKon@brian.info]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Mathias@richmond.info]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Ottis@lourdes.org]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Estel@newton.ca]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Bertha@erik.co.uk]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Joesph@matteo.info]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Alva@cassandre.net]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Vivienne@willis.org]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Angelita@aliza.me]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Timmothy_Okuneva@alyce.tv]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Moriah_Welch@richmond.org]]>
+            </line>
+            <line>
+              <![CDATA[Email format is correct for : Ramiro_Kuhn@harmon.biz]]>
+            </line>
           </reporter-output>
         </test-method> <!-- validateUserBlogDetails -->
       </class> <!-- apiTests.WorkflowTest -->
       <class name="config.RestAssuredConfig">
-        <test-method status="PASS" signature="configure()[pri:0, instance:config.RestAssuredConfig@75bd9247]" name="configure" is-config="true" duration-ms="326" started-at="2021-01-07T22:20:02Z" finished-at="2021-01-07T22:20:03Z">
+        <test-method status="PASS" signature="configure()[pri:0, instance:config.RestAssuredConfig@75bd9247]" name="configure" is-config="true" duration-ms="270" started-at="2021-01-08T13:13:51Z" finished-at="2021-01-08T13:13:51Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- configure -->
