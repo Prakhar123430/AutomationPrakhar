@@ -3,8 +3,10 @@ version: 2.1
 orbs:
   maven: circleci/maven@0.0.12
 
-general:
-  build_dir: ./FreeNowCodingChallenge
+steps: 
+   -checkout: ./FreeNowCodingChallenge/feature
+   -run: mvn dependency:go-offline
+   
 
 workflows:
   maven_test:
