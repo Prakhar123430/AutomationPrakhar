@@ -3,15 +3,10 @@ version: 2.1
 orbs:
   maven: circleci/maven@0.0.12
   
-working_directory: ./FreeNowCodingChallenge
-
-steps:
-      - checkout pom.xml
- 
 workflows:
   maven_test:
     jobs:
-      - maven/test # checkout, build, test, and upload test results
+      - maven/test --settings 'FreeNowCodingChallenge/pom.xml' # checkout, build, test, and upload test results
       
       
       
