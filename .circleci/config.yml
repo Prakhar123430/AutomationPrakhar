@@ -3,9 +3,10 @@ version: 2.1
 orbs:
   maven: circleci/maven@0.0.12
 
-steps: 
-   -checkout: ./FreeNowCodingChallenge/feature
-   -run: mvn dependency:go-offline
+steps:
+      - checkout
+      - restore_cache:
+          key: jars-{{ checksum "./pom.xml" }}-{{ checksum  "FreeNowCodingChallenge/pom.xml" }}
    
 
 workflows:
