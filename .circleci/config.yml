@@ -15,7 +15,7 @@ jobs:
         command: mvn dependency:go-offline --settings 'FreeNowCodingChallenge/pom.xml'
     - run:
         name: Run Tests
-        command: mvn verify --settings 'FreeNowCodingChallenge/pom.xml'
+        command: mvn verify --settings 'pom.xml'
     - save_cache:
         paths:
         - ~/.m2
