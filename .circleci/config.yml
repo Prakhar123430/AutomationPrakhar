@@ -2,13 +2,12 @@ version: 2.1
 
 orbs:
   maven: circleci/maven@0.0.12
+  
+working_directory: ./FreeNowCodingChallenge
 
 steps:
-      - checkout
-      - restore_cache:
-          key: jars-{{ checksum "./pom.xml" }}-{{ checksum  "FreeNowCodingChallenge/pom.xml" }}
-   
-
+      - checkout pom.xml
+ 
 workflows:
   maven_test:
     jobs:
