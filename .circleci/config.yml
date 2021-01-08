@@ -2,11 +2,8 @@ version: 2.1
 
 orbs:
   maven: circleci/maven@0.0.12
-parameters:
-  settings_file:
-    description: Specify a custom settings file to use (optional)
-    type: string
-    default: "FreeNowCodingChallenge"
+
+working_directory: ./FreeNowCodingChallenge
 
 workflows:
   maven_test:
