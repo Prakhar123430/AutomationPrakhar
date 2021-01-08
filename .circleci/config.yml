@@ -3,10 +3,18 @@ version: 2.1
 orbs:
   maven: circleci/maven@0.0.12
   
+parameters:
+  app_src_directory:
+    default: "FreeNowCodingChallenge"
+    description: Useful when the source of your maven project is nott in the root directory of your git repo. Supply the name of the directory or relative path of the directory containing your source code.
+    type: string
+                
+
 workflows:
   maven_test:
     jobs:
       - maven/test # checkout, build, test, and upload test results
+      
   
       
       
