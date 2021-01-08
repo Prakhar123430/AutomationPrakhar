@@ -152,12 +152,12 @@
       <![CDATA[Email format is correct for : Ramiro_Kuhn@harmon.biz]]>
     </line>
   </reporter-output>
-  <suite name="FreeNowApi" duration-ms="18226" started-at="2021-01-08T07:43:51Z" finished-at="2021-01-08T07:44:09Z">
+  <suite name="FreeNowApi" duration-ms="30871" started-at="2021-01-08T16:30:49Z" finished-at="2021-01-08T16:31:20Z">
     <groups>
     </groups>
-    <test name="FreeNowApiTests" duration-ms="18226" started-at="2021-01-08T07:43:51Z" finished-at="2021-01-08T07:44:09Z">
+    <test name="FreeNowApiTests" duration-ms="30871" started-at="2021-01-08T16:30:49Z" finished-at="2021-01-08T16:31:20Z">
       <class name="apiTests.WorkflowTest">
-        <test-method status="PASS" signature="validateUserBlogDetails()[pri:0, instance:apiTests.WorkflowTest@5a39699c]" name="validateUserBlogDetails" duration-ms="18220" started-at="2021-01-08T13:13:51Z" finished-at="2021-01-08T13:14:09Z">
+        <test-method status="PASS" signature="validateUserBlogDetails()[pri:0, instance:apiTests.WorkflowTest@5a39699c]" name="validateUserBlogDetails" duration-ms="30866" started-at="2021-01-08T22:00:49Z" finished-at="2021-01-08T22:01:20Z">
           <reporter-output>
             <line>
               <![CDATA[Email format is correct for : Lura@rod.tv]]>
@@ -313,7 +313,7 @@
         </test-method> <!-- validateUserBlogDetails -->
       </class> <!-- apiTests.WorkflowTest -->
       <class name="config.RestAssuredConfig">
-        <test-method status="PASS" signature="configure()[pri:0, instance:config.RestAssuredConfig@75bd9247]" name="configure" is-config="true" duration-ms="270" started-at="2021-01-08T13:13:51Z" finished-at="2021-01-08T13:13:51Z">
+        <test-method status="PASS" signature="configure()[pri:0, instance:config.RestAssuredConfig@75bd9247]" name="configure" is-config="true" duration-ms="234" started-at="2021-01-08T22:00:48Z" finished-at="2021-01-08T22:00:49Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- configure -->
