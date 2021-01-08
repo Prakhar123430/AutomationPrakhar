@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="FreeNowApi">
+    <test name="FreeNowApiTests">
+        <packages>
+            <package name="config"/>
+            <package name="apiTests"/>
+        </packages>
+    </test>
+</suite>
