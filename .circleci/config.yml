@@ -24,7 +24,10 @@ jobs:
     - store_test_results:
         path: target/surefire-reports
 workflows:
-  maven_test:
+  maven_clean:
     jobs:
-    - maven/test
+    - maven/clean
+  maven_install:
+    jobs:
+    - maven/install
   version: 2

@@ -13,8 +13,7 @@ jobs:
         key: maven-{{ checksum "/tmp/maven_cache_seed" }}
     - run:
         name: Install Dependencies
-        command: cd 'FreeNowCodingChallenge'
-        command: mvn dependency:go-offline --settings  'pom.xml'
+        command: mvn dependency:go-offline --settings  './FreeNowCodingChallenge/pom.xml'
     - run:
         name: Run Tests
         command: mvn verify --settings './FreeNowCodingChallenge/pom.xml'
@@ -25,7 +24,10 @@ jobs:
     - store_test_results:
         path: target/surefire-reports
 workflows:
-  maven_test:
+  maven_clean:
     jobs:
-    - maven/test
+    - maven/clean
+  maven_install:
+    jobs:
+    - maven/install
   version: 2
