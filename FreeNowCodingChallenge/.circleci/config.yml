@@ -1,6 +1,7 @@
 version: 2
 jobs:
   maven/test:
+    working_directory: ~/FreeNowCodingChallenge
     docker:
     - image: circleci/openjdk:8-jdk-node
     steps:
@@ -12,10 +13,10 @@ jobs:
         key: maven-{{ checksum "/tmp/maven_cache_seed" }}
     - run:
         name: Install Dependencies
-        command: mvn dependency:go-offline --settings  './pom.xml'
+        command: mvn dependency:go-offline --settings  './FreeNowCodingChallenge/pom.xml'
     - run:
         name: Run Tests
-        command: ./mvnw test verify
+        command: mvn verify --settings './FreeNowCodingChallenge/pom.xml'
     - save_cache:
         paths:
         - ~/.m2
