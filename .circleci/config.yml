@@ -27,7 +27,6 @@ workflows:
   maven_clean:
     jobs:
     - maven/clean
-workflows:
   maven_install:
     jobs:
     - maven/install
