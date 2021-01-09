@@ -13,8 +13,7 @@ jobs:
         key: maven-{{ checksum "/tmp/maven_cache_seed" }}
     - run:
         name: Install Dependencies
-        command: cd 'FreeNowCodingChallenge'
-        command: mvn dependency:go-offline --settings  'pom.xml'
+        command: mvn dependency:go-offline --settings  './FreeNowCodingChallenge/pom.xml'
     - run:
         name: Run Tests
         command: mvn verify --settings './FreeNowCodingChallenge/pom.xml'
