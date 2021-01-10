@@ -5,14 +5,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.Reporter;
-
 import com.codoid.products.exception.FilloException;
 import bin.CommentsBin;
 import bin.PostBin;
 import bin.UserBin;
 import common.EndPoints;
+import config.RestAssuredConfig;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import springRestServices.Comments;
 import springRestServices.Post;
@@ -21,16 +24,18 @@ import springRestServices.User;
 public class ValidationCaller {
 
 	RequestSpecification specification;
+	User user;
 	int userId;
 	List<Integer> postId = new ArrayList<Integer>();
 
-	public void verifyUserName() {
-		User user = new User();
-		specification = user.getUserDetailsApi();
-		UserBin userBin = user.getUserById(specification,EndPoints.GET_USER);
-		userId = userBin.getUserId();
-		Assert.assertEquals(userBin.getUserName(),System.getProperty("propertyName"));
 
+	public void verifyUserName(String queryParam, String queryParamvalue) {
+		user = new User();
+		specification = user.getUserDetailsApi(queryParam,queryParamvalue);
+		Response response = new RestAssuredConfig().getResponse(specification,EndPoints.GET_USER);
+		UserBin userBin = user.getUserById(response);
+		userId = userBin.getUserId();
+		Assert.assertEquals(response.statusCode(), HttpStatus.SC_OK);
 	}
 
 	public void verifyUserPosts() throws FilloException {
@@ -39,17 +44,18 @@ public class ValidationCaller {
 		List<String> postTitles = new ArrayList<String>();
 		List<String> postBodiesNew = post.storePostBodies();
 		List<String> postTitlesNew = post.storePostTitles();
-
 		specification = post.getUserPostsApi(userId);
-		PostBin[] postBin = post.getPostsByUserId(specification,EndPoints.GET_POSTS);
-		for(PostBin posts : postBin) {
+		Response response = new RestAssuredConfig().getResponse(specification,EndPoints.GET_POSTS);
+		Assert.assertEquals(response.statusCode(), HttpStatus.SC_OK);
+		PostBin[] postBin = post.getPostsByUserId(response);
+		Arrays.asList(postBin).forEach(posts->{
 			postId.add(posts.getId());
 			String postBody = posts.getBody();
 			postBodies.add(postBody);
 			String postTitle = posts.getTitle();
 			postTitles.add(postTitle);
-		}
-
+			
+		});
 
 		for(int i=0; i<postBodies.size(); i++) {
 			Assert.assertEquals(postBodies.get(i).trim(), postBodiesNew.get(i).trim());
@@ -62,19 +68,25 @@ public class ValidationCaller {
 		Comments comments = new Comments();
 		List<String> commentBody = new ArrayList<String>();
 		List<String> commentName = new ArrayList<String>();
-		for(int i=0; i<postId.size(); i++) {
+
+		for(int i=0; i<postId.size();i++){
 			specification = comments.getUserCommentsApi(postId.get(i));
-			CommentsBin[] commentsBin = comments.getCommentsByPostId(specification, EndPoints.GET_COMMENTS);
-			for(CommentsBin comment : commentsBin) {
+			Response response = new RestAssuredConfig().getResponse(specification,EndPoints.GET_COMMENTS);
+			Assert.assertEquals(response.statusCode(), HttpStatus.SC_OK);
+			CommentsBin[] commentsBin = comments.getCommentsByPostId(response);
+			Arrays.asList(commentsBin).forEach(comment->{
 				commentBody.add(comment.getBody());
 				commentName.add(comment.getName());
 				boolean isMatching = validateEmailFormat(comment.getEmail());
 				verifyIfCorrectEmail(isMatching,comment.getEmail());
 
-			}
-			Arrays.fill(commentsBin, null);
+			});
 
+
+			Arrays.fill(commentsBin, null);
 		}
+
+
 	}
 
 	public boolean validateEmailFormat(String email) {
@@ -95,6 +107,13 @@ public class ValidationCaller {
 		else {
 			Reporter.log("Email format is incorrect for :" + " "+email);
 		}
+
+	}
+
+	public void userResponseStatus() {
+		specification = user.getUserDetailsApi("usernames",System.getProperty("propertyName"));
+		int statusCode = new RestAssuredConfig().getResponse(specification,EndPoints.GET_USER).statusCode();		
+		Assert.assertTrue(HttpStatus.SC_INTERNAL_SERVER_ERROR==statusCode, "Expected 500 but returning " +statusCode);
 
 	}
 
