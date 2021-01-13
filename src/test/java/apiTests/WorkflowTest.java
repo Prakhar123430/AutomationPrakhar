@@ -14,7 +14,6 @@ public class WorkflowTest {
 	@Test(priority=1)
 	public void validateUserBlogDetails() {
 		try {
-
 			validationCaller.verifyUserName("username", System.getProperty("propertyName"));
 			validationCaller.verifyUserPosts();
 			validationCaller.addPostCommentsAndVerifyEmailFormat();
@@ -26,6 +25,7 @@ public class WorkflowTest {
 		}
 
 	}
+
 
 	@Test(priority=2)
 	public void validateStatusForInvalidUserQueryParam() {
@@ -39,5 +39,16 @@ public class WorkflowTest {
 		}
 	}
 
+	@Test(priority=3)
+	public void checkEmailKeyInComments() {
+		try {
+			validationCaller.emailKeyValidationForCommentsSection();
+		}
+
+		catch(Exception e) {
+			Reporter.log("Exception is" +e);
+			Assert.assertTrue(false, e.getStackTrace().toString());
+		}
+	}
 
 }

@@ -2,10 +2,10 @@ package assertions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.Reporter;
@@ -15,6 +15,7 @@ import bin.PostBin;
 import bin.UserBin;
 import common.EndPoints;
 import config.RestAssuredConfig;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import springRestServices.Comments;
@@ -30,12 +31,22 @@ public class ValidationCaller {
 
 
 	public void verifyUserName(String queryParam, String queryParamvalue) {
-		user = new User();
-		specification = user.getUserDetailsApi(queryParam,queryParamvalue);
-		Response response = new RestAssuredConfig().getResponse(specification,EndPoints.GET_USER);
-		UserBin userBin = user.getUserById(response);
-		userId = userBin.getUserId();
-		Assert.assertEquals(response.statusCode(), HttpStatus.SC_OK);
+		try {
+			user = new User();
+			specification = user.getUserDetailsApi(queryParam,queryParamvalue);
+			Response response = new RestAssuredConfig().getResponse(specification,EndPoints.GET_USER);
+			UserBin userBin = user.getUserById(response);
+			userId = userBin.getUserId();
+			Assert.assertEquals(response.statusCode(), HttpStatus.SC_OK);
+		}
+
+		catch(Exception e) {
+			System.out.println("Exception is" +e);
+			Reporter.log("Exception is" +e);
+			Assert.assertTrue(false, e.getStackTrace().toString());
+
+		}
+
 	}
 
 	public void verifyUserPosts() throws FilloException {
@@ -54,7 +65,7 @@ public class ValidationCaller {
 			postBodies.add(postBody);
 			String postTitle = posts.getTitle();
 			postTitles.add(postTitle);
-			
+
 		});
 
 		for(int i=0; i<postBodies.size(); i++) {
@@ -109,12 +120,29 @@ public class ValidationCaller {
 		}
 
 	}
+	
 
 	public void userResponseStatus() {
 		specification = user.getUserDetailsApi("usernames",System.getProperty("propertyName"));
 		int statusCode = new RestAssuredConfig().getResponse(specification,EndPoints.GET_USER).statusCode();		
 		Assert.assertTrue(HttpStatus.SC_INTERNAL_SERVER_ERROR==statusCode, "Expected 500 but returning " +statusCode);
 
+	}
+
+	public void emailKeyValidationForCommentsSection() {
+		Comments comments = new Comments();
+		for(int i=0; i<postId.size();i++){
+			specification = comments.getUserCommentsApi(postId.get(i));
+			Response response= new RestAssuredConfig().getResponse(specification,EndPoints.GET_COMMENTS);
+			int statusCode = response.statusCode();
+			JsonPath jsp = new JsonPath(response.asString());
+			List<HashMap<Object,Object>> dList = jsp.getList("$");
+			for(HashMap<Object,Object> obj: dList){
+				if(!obj.containsKey("email")){
+					Assert.assertTrue(HttpStatus.SC_INTERNAL_SERVER_ERROR==statusCode, "Expected 500 but returning " +statusCode);
+				}
+			}
+		}
 	}
 
 }
