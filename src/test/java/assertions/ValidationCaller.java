@@ -28,6 +28,7 @@ public class ValidationCaller {
 	User user;
 	int userId;
 	List<Integer> postId = new ArrayList<Integer>();
+	Comments comments = new Comments();
 
 
 	public void verifyUserName(String queryParam, String queryParamvalue) {
@@ -76,13 +77,11 @@ public class ValidationCaller {
 	}
 
 	public void addPostCommentsAndVerifyEmailFormat() {
-		Comments comments = new Comments();
 		List<String> commentBody = new ArrayList<String>();
 		List<String> commentName = new ArrayList<String>();
 
 		for(int i=0; i<postId.size();i++){
-			specification = comments.getUserCommentsApi(postId.get(i));
-			Response response = new RestAssuredConfig().getResponse(specification,EndPoints.GET_COMMENTS);
+			Response response = getResponseForCommentsApi(i);
 			Assert.assertEquals(response.statusCode(), HttpStatus.SC_OK);
 			CommentsBin[] commentsBin = comments.getCommentsByPostId(response);
 			Arrays.asList(commentsBin).forEach(comment->{
@@ -122,21 +121,16 @@ public class ValidationCaller {
 	}
 
 
-	public void checkForNullUserResponseStatus() {
+	public void checkForNotFoundUserResponseStatus() {
 		specification = user.getUserDetailsApi("usernames",System.getProperty("propertyName"));
-		Response response = new RestAssuredConfig().getResponse(specification,EndPoints.GET_USER);		
-		Assert.assertEquals(response.statusCode(), HttpStatus.SC_OK);
-		if(response!=null) {
-			Reporter.log("Response returned is invalid");
-		}
+		int statusCode= new RestAssuredConfig().getResponse(specification,EndPoints.GET_USER).statusCode();		
+		Assert.assertTrue(HttpStatus.SC_NOT_FOUND==statusCode, "Expected 404 but returning " +statusCode);
 
 	}
 
 	public void emailKeyValidationForCommentsSection() {
-		Comments comments = new Comments();
 		for(int i=0; i<postId.size();i++){
-			specification = comments.getUserCommentsApi(postId.get(i));
-			Response response= new RestAssuredConfig().getResponse(specification,EndPoints.GET_COMMENTS);
+			Response response = getResponseForCommentsApi(i);
 			int statusCode = response.statusCode();
 			JsonPath jsp = new JsonPath(response.asString());
 			List<HashMap<Object,Object>> dList = jsp.getList("$");
@@ -156,8 +150,15 @@ public class ValidationCaller {
 		Assert.assertEquals(response.statusCode(), HttpStatus.SC_OK);
 		if(response!=null) {
 			Reporter.log("Response returned is invalid");
+			Assert.assertFalse(false,"Response returned is valid");
 		}
 
+	}
+	
+	public Response getResponseForCommentsApi(int i) {
+		specification = comments.getUserCommentsApi(postId.get(i));
+		Response response= new RestAssuredConfig().getResponse(specification,EndPoints.GET_COMMENTS);
+		return response;
 	}
 
 }

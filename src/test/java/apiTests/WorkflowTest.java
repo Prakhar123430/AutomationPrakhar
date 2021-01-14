@@ -30,7 +30,7 @@ public class WorkflowTest {
 	@Test(priority=2)
 	public void validateStatusForInvalidUserQueryParam() {
 		try {
-			validationCaller.checkForNullUserResponseStatus();
+			validationCaller.checkForNotFoundUserResponseStatus();
 		}
 
 		catch(Exception e) {
