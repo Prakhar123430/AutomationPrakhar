@@ -120,12 +120,15 @@ public class ValidationCaller {
 		}
 
 	}
-	
 
-	public void userResponseStatus() {
+
+	public void checkForNullUserResponseStatus() {
 		specification = user.getUserDetailsApi("usernames",System.getProperty("propertyName"));
-		int statusCode = new RestAssuredConfig().getResponse(specification,EndPoints.GET_USER).statusCode();		
-		Assert.assertTrue(HttpStatus.SC_INTERNAL_SERVER_ERROR==statusCode, "Expected 500 but returning " +statusCode);
+		Response response = new RestAssuredConfig().getResponse(specification,EndPoints.GET_USER);		
+		Assert.assertEquals(response.statusCode(), HttpStatus.SC_OK);
+		if(response!=null) {
+			Reporter.log("Response returned is invalid");
+		}
 
 	}
 
@@ -139,10 +142,22 @@ public class ValidationCaller {
 			List<HashMap<Object,Object>> dList = jsp.getList("$");
 			for(HashMap<Object,Object> obj: dList){
 				if(!obj.containsKey("email")){
+					Reporter.log("Object {" + obj.toString() + "} does not contain the required key");
 					Assert.assertTrue(HttpStatus.SC_INTERNAL_SERVER_ERROR==statusCode, "Expected 500 but returning " +statusCode);
 				}
 			}
 		}
+	}
+
+	public void validateEmptyResponse(String alphanumericParam) {
+		Post post = new Post();
+		specification = post.getUserPostsApi(alphanumericParam);
+		Response response = new RestAssuredConfig().getResponse(specification,EndPoints.GET_POSTS);
+		Assert.assertEquals(response.statusCode(), HttpStatus.SC_OK);
+		if(response!=null) {
+			Reporter.log("Response returned is invalid");
+		}
+
 	}
 
 }

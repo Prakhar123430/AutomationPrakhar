@@ -30,7 +30,7 @@ public class WorkflowTest {
 	@Test(priority=2)
 	public void validateStatusForInvalidUserQueryParam() {
 		try {
-			validationCaller.userResponseStatus();
+			validationCaller.checkForNullUserResponseStatus();
 		}
 
 		catch(Exception e) {
@@ -38,8 +38,20 @@ public class WorkflowTest {
 			Assert.assertTrue(false, e.getStackTrace().toString());
 		}
 	}
-
+	
 	@Test(priority=3)
+	public void validatePostApiWithAlphanumericQueryParam() {
+		try {
+			validationCaller.validateEmptyResponse("abc%");
+		}
+		
+		catch(Exception e) {
+			Reporter.log("Exception is" +e);
+			Assert.assertTrue(false, e.getStackTrace().toString());
+		}
+	}
+
+	@Test(priority=4)
 	public void checkEmailKeyInComments() {
 		try {
 			validationCaller.emailKeyValidationForCommentsSection();

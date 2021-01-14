@@ -20,6 +20,15 @@ public class Post {
 		return requestSpecification;
 
 	}
+	
+	public RequestSpecification getUserPostsApi(String userId) {
+
+		RequestSpecification requestSpecification = new RestAssuredConfig().getRequestSpecification();
+		requestSpecification.queryParam("userId", userId).log().all();
+
+		return requestSpecification;
+
+	}
 
 	public PostBin[] getPostsByUserId(Response response) {
 		PostBin[] postBin = response.as(PostBin[].class);
