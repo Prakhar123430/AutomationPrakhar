@@ -1,5 +1,11 @@
 package bin;
 
+/**
+ * Author : Prakhar Chatterjee
+ * Created on : 01/06/2021(Date Format : MM/DD/YYYY)
+ * Class intent : DTO class to parse response body obtained from getComments() Api
+ */
+
 public class CommentsBin {
 	private int postId;
 	private int id;

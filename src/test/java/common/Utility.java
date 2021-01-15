@@ -9,6 +9,7 @@ import com.codoid.products.fillo.Recordset;
 
 public class Utility {
 	
+	//Method to read the post bodies from the reference excel file FreeNow.xlsx for assertion purpose
 	public List<String> readPostBody() throws FilloException{
 		 List<String> postBodies = new ArrayList<String>();
 		 Fillo fillo = new Fillo();
@@ -28,6 +29,7 @@ public class Utility {
 		
 	}
 	
+	//Method to read the post titles from the reference excel file FreeNow.xlsx for assertion purpose
 	public List<String> readPostTitle() throws FilloException{
 		 List<String> postTitles = new ArrayList<String>();
 		 Fillo fillo = new Fillo();

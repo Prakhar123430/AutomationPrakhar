@@ -22,6 +22,12 @@ import springRestServices.Comments;
 import springRestServices.Post;
 import springRestServices.User;
 
+/**
+ * Author : Prakhar Chatterjee
+ * Created on : 01/07/2021(Date Format : MM/DD/YYYY)
+ * Class intent : This class contains methods that are mostly called from the test class for performing test validations
+ */
+
 public class ValidationCaller {
 
 	RequestSpecification specification;
@@ -31,9 +37,10 @@ public class ValidationCaller {
 	Comments comments = new Comments();
 
 
-	public void verifyUserName(String queryParam, String queryParamvalue) {
+	// Method to retrieve the user id using user api
+	public void getUserId(String queryParam, String queryParamvalue) {
 		try {
-			user = new User();
+		    user = new User();
 			specification = user.getUserDetailsApi(queryParam,queryParamvalue);
 			Response response = new RestAssuredConfig().getResponse(specification,EndPoints.GET_USER);
 			UserBin userBin = user.getUserById(response);
@@ -50,6 +57,7 @@ public class ValidationCaller {
 
 	}
 
+	// Method to verify post body and title for the posts made by Samantha and to fetch the postids for every post
 	public void verifyUserPosts() throws FilloException {
 		Post post = new Post();
 		List<String> postBodies = new ArrayList<String>();
@@ -58,6 +66,7 @@ public class ValidationCaller {
 		List<String> postTitlesNew = post.storePostTitles();
 		specification = post.getUserPostsApi(userId);
 		Response response = new RestAssuredConfig().getResponse(specification,EndPoints.GET_POSTS);
+		//Response response= getResponseForPostApi(userId);
 		Assert.assertEquals(response.statusCode(), HttpStatus.SC_OK);
 		PostBin[] postBin = post.getPostsByUserId(response);
 		Arrays.asList(postBin).forEach(posts->{
@@ -76,6 +85,7 @@ public class ValidationCaller {
 
 	}
 
+	// Method to store comments body and name and to verify if the email in the comments section are placed in proper format
 	public void addPostCommentsAndVerifyEmailFormat() {
 		List<String> commentBody = new ArrayList<String>();
 		List<String> commentName = new ArrayList<String>();
@@ -99,6 +109,7 @@ public class ValidationCaller {
 
 	}
 
+	// Method to use a regex to match the email format
 	public boolean validateEmailFormat(String email) {
 
 		String emailRegex = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
@@ -109,6 +120,7 @@ public class ValidationCaller {
 
 	}
 
+	// Method to check if email is in proper format and print in the log file as per boolean output post pattern matching
 	public void verifyIfCorrectEmail(boolean isMatching, String email) {
 		if(isMatching) {
 			Reporter.log("Email format is correct for :" + " "+email);
@@ -121,6 +133,7 @@ public class ValidationCaller {
 	}
 
 
+	// Method to determine if not found is triggered as the response status in case we query the user table with a key that's not present
 	public void checkForNotFoundUserResponseStatus() {
 		specification = user.getUserDetailsApi("usernames",System.getProperty("propertyName"));
 		int statusCode= new RestAssuredConfig().getResponse(specification,EndPoints.GET_USER).statusCode();		
@@ -128,6 +141,7 @@ public class ValidationCaller {
 
 	}
 
+	//Method to determine if the key shows up as email and not anything else in the get comments api response and throw an error 500 if it does
 	public void emailKeyValidationForCommentsSection() {
 		for(int i=0; i<postId.size();i++){
 			Response response = getResponseForCommentsApi(i);
@@ -143,6 +157,8 @@ public class ValidationCaller {
 		}
 	}
 
+	
+	//Method to determine that the api response is a null array when an alphanumeric string is passed for postid in the get post api and the response is 200
 	public void validateEmptyResponse(String alphanumericParam) {
 		Post post = new Post();
 		specification = post.getUserPostsApi(alphanumericParam);
@@ -155,10 +171,11 @@ public class ValidationCaller {
 
 	}
 	
+    //Method to store the request specification and return the response for the get comments api
 	public Response getResponseForCommentsApi(int i) {
 		specification = comments.getUserCommentsApi(postId.get(i));
 		Response response= new RestAssuredConfig().getResponse(specification,EndPoints.GET_COMMENTS);
 		return response;
 	}
-
+	
 }

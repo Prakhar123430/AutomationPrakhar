@@ -8,10 +8,17 @@ import config.RestAssuredConfig;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
+/**
+ * Author : Prakhar Chatterjee
+ * Created on : 01/07/2021(Date Format : MM/DD/YYYY)
+ * Class intent : This class is created to return the request specification and response array of objects for post section.
+ */
+
 public class Post {
 
 	Response response;
 
+	//Method to return request spec for Posts api
 	public RequestSpecification getUserPostsApi(int userId) {
 
 		RequestSpecification requestSpecification = new RestAssuredConfig().getRequestSpecification();
@@ -21,6 +28,7 @@ public class Post {
 
 	}
 	
+	//Method to return posts response as an array of objects
 	public RequestSpecification getUserPostsApi(String userId) {
 
 		RequestSpecification requestSpecification = new RestAssuredConfig().getRequestSpecification();
