@@ -18,7 +18,7 @@ public class Post {
 
 	Response response;
 
-	//Method to return request spec for Posts api
+	//Method to return request spec for Posts api with an integer userId as the parameter
 	public RequestSpecification getUserPostsApi(int userId) {
 
 		RequestSpecification requestSpecification = new RestAssuredConfig().getRequestSpecification();
@@ -28,7 +28,7 @@ public class Post {
 
 	}
 	
-	//Method to return posts response as an array of objects
+	//Method overloaded to request spec for Posts api with a string userId as the parameter
 	public RequestSpecification getUserPostsApi(String userId) {
 
 		RequestSpecification requestSpecification = new RestAssuredConfig().getRequestSpecification();
@@ -38,6 +38,7 @@ public class Post {
 
 	}
 
+	//Method to return post response as an array of objects
 	public PostBin[] getPostsByUserId(Response response) {
 		PostBin[] postBin = response.as(PostBin[].class);
 
@@ -45,6 +46,7 @@ public class Post {
 
 	}
 
+	//Method to return list of post bodies
 	public List<String> storePostBodies() throws FilloException {
 		Utility utility = new Utility();
 		List<String> bodies =  utility.readPostBody();
@@ -52,6 +54,7 @@ public class Post {
 		return bodies;
 	}
 
+	//Method to return list of post titles
 	public List<String> storePostTitles() throws FilloException {
 		Utility utility = new Utility();
 		List<String> titles =  utility.readPostTitle();
