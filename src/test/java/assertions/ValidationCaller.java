@@ -49,7 +49,6 @@ public class ValidationCaller {
 		}
 
 		catch(Exception e) {
-			System.out.println("Exception is" +e);
 			Reporter.log("Exception is" +e);
 			Assert.assertTrue(false, e.getStackTrace().toString());
 

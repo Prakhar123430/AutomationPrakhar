@@ -14,15 +14,18 @@ import io.restassured.specification.RequestSpecification;
 
 public class RestAssuredConfig {
 
+	//Method to set up base uri as a configuration parameter.
 	@BeforeSuite(alwaysRun = true)
 	public void configure() {
 		RestAssured.baseURI = "https://jsonplaceholder.typicode.com/";
 	}
 
+	//Method to pass the default content type as a request parameter.
 	public RequestSpecification getRequestSpecification() {
 		return RestAssured.given().contentType(ContentType.JSON);
 	}
 
+	//Method to get reponse using request specification and endpoint
 	public Response getResponse(RequestSpecification requestSpecification,String endpoint){
 		Response response = requestSpecification.get(endpoint);
 		response.then().log().all();
